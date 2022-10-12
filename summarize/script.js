@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const fetchData = async (rawText) => {
-  const text = rawText.replace(/(\r\n|\n|\r)/gm, " ");
+  const text = rawText.replace(/(\r\n|\n|\r)/gm, " ").trim();
 
   try {
     const tokensResponse = await axios({
@@ -125,9 +125,9 @@ const summarize = async (rawText) => {
     const freqTable = createFreqTable(tokens);
 
     const sentences = splitSentences(text);
-    console.log(sentences);
+
     const sentenceScores = createSentenceScores(sentences, freqTable);
-    console.log(sentenceScores);
+
     const threshold = findAverageScore(Object.values(sentenceScores));
 
     const summary = generateSummary(sentences, sentenceScores, threshold);
