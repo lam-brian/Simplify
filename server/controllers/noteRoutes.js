@@ -8,12 +8,13 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  //   const note = req.body;
-  //   await Note.create(note);
-  //   res.json(note);
-  const text = req.body.text;
-  const sum = await summarize(text);
-  res.json({ summary: sum });
+  // const note = req.body;
+  // await Note.create(note);
+  // res.json(note);
+
+  const { text } = body.req;
+  const summary = await summarize(text);
+  res.json({ summary });
 });
 
 module.exports = router;

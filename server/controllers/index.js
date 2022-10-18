@@ -3,7 +3,7 @@ const userRoutes = require("./userRoutes");
 const noteRoutes = require("./noteRoutes");
 
 router.use("/users", userRoutes);
-router.use("./notes", noteRoutes);
+router.use("/notes", noteRoutes);
 
 router.get("/", (req, res) => {
   res.json("Hello World");

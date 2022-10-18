@@ -6,17 +6,17 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
   const [inputValue, setInputValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
+  useEffect(() => {
+    onInput(inputValue);
+  }, [onInput, inputValue]);
+
   const inputChangeHandler = (e) => {
     setInputValue(e.target.value);
   };
 
-  const touchHandler = () => {
+  const touchChangeHandler = () => {
     setIsTouched(true);
   };
-
-  useEffect(() => {
-    onInput(inputValue);
-  }, [inputValue, onInput]);
 
   const renderedElement =
     element === "input" ? (
@@ -25,7 +25,7 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         type={type}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        onBlur={touchHandler}
+        onBlur={touchChangeHandler}
         value={inputValue}
       />
     ) : (
@@ -34,7 +34,7 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         rows={rows || 3}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        onBlur={touchHandler}
+        onBlur={touchChangeHandler}
         value={inputValue}
       />
     );
