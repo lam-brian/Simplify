@@ -1,5 +1,4 @@
-// const axios = require("axios");
-import axios from "axios";
+const axios = require("axios");
 
 const fetchData = async (rawText) => {
   const text = rawText.replace(/(\r\n|\n|\r)/gm, " ").trim();
@@ -8,7 +7,7 @@ const fetchData = async (rawText) => {
     const tokensResponse = await axios({
       method: "post",
       url: "https://api.apilayer.com/nlp/tokenizer?lang=en",
-      headers: { apikey: "QySSTfHEOJkd8Koov5rSj5NYDnY58y5O" },
+      headers: { apikey: "YOUR_API_KEY" },
       data: text,
     });
     const data = tokensResponse.data;
@@ -143,8 +142,6 @@ const summarize = async (rawText) => {
   }
 };
 
-// summarize(
-//   `Tokenizer: Segmenting text into words, punctuations marks etc. This is done by applying rules specific to each language. For example, punctuation at the end of a sentence should be split off – whereas “U.K.” should remain one token. Each Doc consists of individual tokens, and we can iterate over them:`
-// ).then((sum) => console.log(sum));
-
-export default summarize;
+summarize(
+  `Tokenizer: Segmenting text into words, punctuations marks etc. This is done by applying rules specific to each language. For example, punctuation at the end of a sentence should be split off – whereas “U.K.” should remain one token. Each Doc consists of individual tokens, and we can iterate over them:`
+).then((sum) => console.log(sum));

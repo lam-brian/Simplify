@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import summarize from "../../helpers/script";
 
 import Button from "../FormElements/Button/Button";
 import Input from "../FormElements/Input/Input";
@@ -14,8 +13,17 @@ const SummaryForm = () => {
 
     if (!urlInput && !textInput) return;
 
-    const summary = await summarize(textInput);
-    console.log(summary);
+    const res = await fetch("http://localhos:3001/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(textInput),
+    });
+
+    const data = await res.json();
+
+    console.log(data);
   };
 
   const urlInputHandler = useCallback((input) => {
