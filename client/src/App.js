@@ -1,10 +1,13 @@
-import React from 'react';
-import './App.css';
+import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
-    <div>Hello World</div>
+    <Layout>
+      <div>Hello world</div>
+    </Layout>
   );
 }
 
