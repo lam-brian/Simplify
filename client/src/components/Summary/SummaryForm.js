@@ -17,9 +17,9 @@ const SummaryForm = () => {
     const res = await fetch("http://localhost:3001/notes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text: text }),
     });
-
+    console.log(text)
     const data = await res.json();
 
     console.log(data);
