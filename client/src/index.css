@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+:root {
+  --black: #1f1f1f;
+  --white: #fff;
+  --grey: #dedede;
+}
 
 html {
   font-size: 62.5%;
@@ -20,4 +26,5 @@ body {
   font-family: "Inter", sans-serif;
   line-height: 1;
   font-size: 1.6rem;
+  color: var(--black);
 }

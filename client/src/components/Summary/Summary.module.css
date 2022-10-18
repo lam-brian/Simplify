@@ -1,0 +1,19 @@
+.heading {
+  margin-bottom: 6.4rem;
+}
+
+.heading h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
+  font-weight: 600;
+}
+
+.heading p {
+  line-height: 1.5;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10rem;
+}

@@ -1,0 +1,28 @@
+.form-control label,
+.form-control input,
+.form-control textarea {
+  display: block;
+}
+
+.form-control label {
+  margin-bottom: 0.4rem;
+  font-size: 1.4rem;
+}
+
+.form-control input,
+.form-control textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.8rem;
+  margin-bottom: 2.4rem;
+  border: 1px solid var(--grey);
+}
+
+.form-control input :last-child,
+.form-control textarea:last-child {
+  margin-bottom: 0;
+}
+
+.form-control textarea {
+  resize: vertical;
+}
