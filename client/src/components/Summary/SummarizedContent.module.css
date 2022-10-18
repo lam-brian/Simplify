@@ -1,0 +1,35 @@
+.content h2 {
+  font-size: 2rem;
+  margin-bottom: 3.1rem;
+  font-weight: 600;
+}
+
+.paragraph {
+  margin-bottom: 3.1rem;
+}
+
+.paragraph p {
+  line-height: 1.5;
+  font-size: 1.4rem;
+}
+
+.keywords {
+  width: 50%;
+}
+
+.tags {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.1rem;
+}
+
+.tags button {
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: #464646;
+  background: none;
+  border: 1px solid rgba(31, 31, 31, 0.5);
+  border-radius: 100px;
+  padding: 1.2rem 1.6rem;
+}
