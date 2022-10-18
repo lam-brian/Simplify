@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./Input.module.css";
 
-const Input = ({
-  element,
-  label,
-  id,
-  type,
-  placeholder,
-  changeHandler,
-  touchHandler,
-  rows,
-}) => {
+const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
   const [inputValue, setInputValue] = useState("");
+  const [isTouched, setIsTouched] = useState(false);
+
+  const inputChangeHandler = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const touchHandler = () => {
+    setIsTouched(true);
+  };
+
+  useEffect(() => {
+    onInput(inputValue);
+  }, [inputValue, onInput]);
 
   const renderedElement =
     element === "input" ? (
@@ -20,7 +24,7 @@ const Input = ({
         id={id}
         type={type}
         placeholder={placeholder || null}
-        onChange={changeHandler}
+        onChange={inputChangeHandler}
         onBlur={touchHandler}
         value={inputValue}
       />
@@ -29,7 +33,7 @@ const Input = ({
         id={id}
         rows={rows || 3}
         placeholder={placeholder || null}
-        onChange={changeHandler}
+        onChange={inputChangeHandler}
         onBlur={touchHandler}
         value={inputValue}
       />

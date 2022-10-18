@@ -8,7 +8,8 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Summarize />} />
+        <Route path="/" element={<Navigate to="/summarize" />} />
+        <Route path="/summarize" element={<Summarize />} />
       </Routes>
     </Layout>
   );
