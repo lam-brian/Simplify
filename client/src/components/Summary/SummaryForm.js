@@ -22,7 +22,7 @@ const SummaryForm = () => {
     console.log(text)
     const data = await res.json();
 
-    console.log(data);
+    console.log(data.sum);
   };
 
   const urlInputHandler = useCallback((input) => {
