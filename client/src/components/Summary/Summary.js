@@ -1,8 +1,16 @@
+import { useState } from "react";
+
 import SummaryForm from "./SummaryForm";
 import SummarizedContent from "./SummarizedContent";
 import styles from "./Summary.module.css";
 
 const Summary = () => {
+  const [summary, setSummary] = useState("");
+
+  const retrieveSummaryHandler = (text) => {
+    setSummary(text);
+  };
+
   return (
     <>
       <div className={styles.heading}>
@@ -15,8 +23,8 @@ const Summary = () => {
         </p>
       </div>
       <div className={styles.summary}>
-        <SummaryForm />
-        <SummarizedContent />
+        <SummaryForm onRetrieveSummary={retrieveSummaryHandler} />
+        <SummarizedContent summary={summary} />
       </div>
     </>
   );

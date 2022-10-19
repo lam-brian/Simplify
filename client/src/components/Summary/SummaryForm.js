@@ -4,7 +4,7 @@ import Button from "../FormElements/Button/Button";
 import Input from "../FormElements/Input/Input";
 import styles from "./SummaryForm.module.css";
 
-const SummaryForm = () => {
+const SummaryForm = ({ onRetrieveSummary }) => {
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
 
@@ -21,7 +21,7 @@ const SummaryForm = () => {
 
     const data = await res.json();
 
-    console.log(data);
+    onRetrieveSummary(data.summary);
   };
 
   const urlInputHandler = useCallback((input) => {
