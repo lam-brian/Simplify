@@ -7,7 +7,7 @@ const fetchData = async (rawText) => {
     const tokensResponse = await axios({
       method: "post",
       url: "https://api.apilayer.com/nlp/tokenizer?lang=en",
-      headers: { apikey: "QySSTfHEOJkd8Koov5rSj5NYDnY58y5O" },
+      headers: { apikey: process.env.API_LAYER_KEY },
       data: text,
     });
     const data = tokensResponse.data;
