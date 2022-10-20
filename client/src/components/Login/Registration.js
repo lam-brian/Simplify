@@ -2,23 +2,23 @@ import Button from "../FormElements/Button/Button";
 import styles from "./Registration.module.css";
 import { useState } from "react";
 import Vector from "../../images/close-circle.png";
-import { logo } from "../../images";
-const Reg = ({setOpenModal}) => {
+import { simplifyLogo } from "../../images";
+const Reg = ({ setOpenModal }) => {
   const [index, setindex] = useState(0);
-  
+
   return (
     <>
       <div className={styles.container}>
-     
         <div className={styles.frame}>
-          <button className={styles.close}
+          <button
+            className={styles.close}
             onClick={() => {
               setOpenModal(false);
             }}
           >
-          <img className={styles.vector} src={Vector} alt="" />
+            <img className={styles.vector} src={Vector} alt="" />
           </button>
-          <img className={styles.logo} src={logo} />
+          <img className={styles.logo} src={simplifyLogo} alt="logo" />
           <div hidden={index !== 0}>
             <div className={styles.signup}>Sign up with Simplify</div>
             <form>

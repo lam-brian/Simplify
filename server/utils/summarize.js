@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { fetchData } = require("./helpers");
 
 const splitSentences = (text) => {
@@ -134,11 +133,13 @@ const summarize = async (rawText) => {
 
     const summary = generateSummary(sentences, sentenceScores, threshold);
 
+    const filteredKeywords = keywords.filter((keyword) => keyword.score > 0.6);
+
     if (!summary) {
       throw new Error("Unable to summarize");
     }
 
-    return { summary, keywords };
+    return { summary, keywords: filteredKeywords };
   } catch (err) {
     console.log(err);
   }

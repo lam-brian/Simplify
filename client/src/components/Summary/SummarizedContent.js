@@ -7,9 +7,8 @@ const SummarizedContent = ({ summary, keywords }) => {
   const renderedKeywords = keywords.map((keyword) => (
     <button key={keyword.score}>{keyword.text}</button>
   ));
-  console.log(keywords);
- const [modalOpen, setModalOpen] = useState(false);
 
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className={styles.content}>
