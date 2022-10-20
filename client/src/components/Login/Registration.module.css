@@ -16,18 +16,17 @@
 }
 
 .frame {
-display: flex;
-flex-direction: column;
-padding: 0px;
-gap: 24px;
-width: 426px;
-height: 595px;
-flex: none;
-order: 2;
-flex-grow: 0;
-z-index: 2;
-align-items: center;
-
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  gap: 24px;
+  width: 426px;
+  height: 595px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 2;
+  align-items: center;
 }
 
 .close {
@@ -35,10 +34,10 @@ align-items: center;
 }
 
 .vector {
-position: absolute;
-right: 8.33%;
-top: 5%;
-cursor: pointer;
+  position: absolute;
+  right: 8.33%;
+  top: 5%;
+  cursor: pointer;
 }
 
 .logo {
@@ -50,99 +49,98 @@ cursor: pointer;
 }
 
 .signup {
-width: 426px;
-height: 31px;
-font-family: 'Lora';
-font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 31px;
-color: #2A4988;
-transform: translate(25%);
-}
-
-.signin{
   width: 426px;
-height: 31px;
-font-family: 'Lora';
-font-style: normal;
-font-weight: 600;
-font-size: 24px;
-line-height: 31px;
-color: #2A4988;
-transform: translate(40%);
+  height: 31px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  color: #2a4988;
+  transform: translate(25%);
 }
 
-.label{
-width: 426px;
-height: 23px;
-font-family: 'Lora';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 125%;
-color: #252428;
-margin-bottom: 3%;
+.signin {
+  width: 426px;
+  height: 31px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  color: #2a4988;
+  transform: translate(40%);
 }
 
-.input{
-box-sizing: border-box;
-margin: 0%;
-width: 426px;
-height: 54px;
-background: #FFFFFF;
-border: 1px solid #B2B2B2;
-border-radius: 6px;
-margin-bottom: 7%;
-padding: 0.8rem;
+.label {
+  width: 426px;
+  height: 23px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 125%;
+  color: #252428;
+  margin-bottom: 3%;
 }
 
-.checkbox{
-height: 24px;
-width: 24px;
-position: absolute;
-left: 7%;
-bottom: 22%;
+.input {
+  box-sizing: border-box;
+  margin: 0%;
+  width: 426px;
+  height: 54px;
+  background: #ffffff;
+  border: 1px solid #b2b2b2;
+  border-radius: 6px;
+  margin-bottom: 7%;
+  padding: 0.8rem;
+}
+
+.checkbox {
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  left: 7%;
+  bottom: 22%;
 }
 
 .term {
   width: 320px;
-height: 20px;
-font-family: 'Lora';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 125%;
-color: #57595A;
-position: absolute;
-left: 15%;
-bottom: 22%;
+  height: 20px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #57595a;
+  position: absolute;
+  left: 15%;
+  bottom: 22%;
 }
 
-.account{
-width: 424px;
-height: 23px;
-font-family: 'Lora';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 125%;
-position: absolute;
-color: #57595A;
-bottom: 3%;
- transform: translate(0%, -60%)
+.account {
+  width: 424px;
+  height: 23px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 125%;
+  position: absolute;
+  color: #57595a;
+  bottom: 3%;
+  transform: translate(0%, -60%);
 }
 
-.login{
+.login {
   border-style: none;
   background-color: white;
   font-size: large;
-  font-family: 'Lora';
-  color: #2A4988;
-  cursor: pointer
+  font-family: "Lora";
+  color: #2a4988;
+  cursor: pointer;
 }
 
-.register{
-  font-family: 'Lora';
+.register {
+  font-family: "Lora";
 }
-
