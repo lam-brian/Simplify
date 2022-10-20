@@ -1,28 +1,5 @@
 const axios = require("axios");
-
-const fetchData = async (rawText) => {
-  const text = rawText.replace(/(\r\n|\n|\r)/gm, " ").trim();
-
-  try {
-    const tokensResponse = await axios({
-      method: "post",
-      url: "https://api.apilayer.com/nlp/tokenizer?lang=en",
-      headers: { apikey: process.env.API_LAYER_KEY },
-      data: text,
-    });
-    const data = tokensResponse.data;
-
-    if (!data || data.status === "ZERO_RESULTS") {
-      throw new Error("Could not summarize");
-    }
-
-    const tokens = data.result;
-
-    return { tokens, text };
-  } catch (err) {
-    throw new Error("Could not summarize");
-  }
-};
+const { fetchData } = require("./helpers");
 
 const splitSentences = (text) => {
   const sentences = [];
@@ -119,8 +96,33 @@ const generateSummary = (sentences, sentenceScores, threshold) => {
 };
 
 const summarize = async (rawText) => {
+  const text = rawText.replace(/(\r\n|\n|\r)/gm, " ").trim();
+
   try {
-    const { tokens, text } = await fetchData(rawText);
+    const results = await Promise.all([
+      fetchData(
+        "https://api.apilayer.com/nlp/tokenizer?lang=en",
+        "POST",
+        {
+          apikey: process.env.API_LAYER_KEY,
+        },
+        text
+      ),
+      fetchData(
+        "https://api.apilayer.com/keyword",
+        "POST",
+        {
+          apikey: process.env.API_LAYER_KEY,
+        },
+        text
+      ),
+    ]);
+
+    const [tokens, keywords] = results.map((res) => res.result);
+
+    if (!tokens || !tokens.length || !keywords || !keywords.length) {
+      throw new Error("Error fetching data");
+    }
 
     const freqTable = createFreqTable(tokens);
 
@@ -136,7 +138,7 @@ const summarize = async (rawText) => {
       throw new Error("Unable to summarize");
     }
 
-    return summary;
+    return { summary, keywords };
   } catch (err) {
     console.log(err);
   }
