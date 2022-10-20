@@ -12,3 +12,11 @@
   padding: 1.2rem 2.6rem;
   border-radius: 6px;
 }
+
+.btn--secondary {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 1.2rem 2.6rem;
+  border-radius: 6px;
+  width: 100%;
+}

@@ -1,7 +1,15 @@
 import Button from "../FormElements/Button/Button";
 import styles from "./SummarizedContent.module.css";
-
+import Reg from "../Login/Login";
+import { useState } from "react";
 const SummarizedContent = ({ summary }) => {
+
+  const [ modal, setModal ] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  }
+
   return (
     <div className={styles.content}>
       <div className={styles.paragraph}>
@@ -19,7 +27,12 @@ const SummarizedContent = ({ summary }) => {
           <button>highlighting</button>
         </div>
       </div>
-      <Button className="btn--primary">Save notes</Button>
+      <Button onClick={toggleModal} className="btn--primary">Save notes</Button>
+      
+      {modal && (
+        <Reg />
+      )}
+
     </div>
   );
 };
