@@ -14,9 +14,11 @@
 }
 
 .btn--secondary {
-  background-color: var(--black);
+  background-color: #2A4988 ;
   color: var(--white);
   padding: 1.2rem 2.6rem;
   border-radius: 6px;
-  width: 100%;
+  width: 90%;
+  position: absolute;
+  bottom: 12%;
 }
