@@ -1,10 +1,16 @@
 import { NavLink } from "react-router-dom";
-
+import Reg from "../Login/Login";
 import Button from "../FormElements/Button/Button";
 import { logo } from "../../images";
 import styles from "./MainNavigation.module.css";
-
+import { useEffect, useState } from "react";
 const MainNavigation = () => {
+    const [ modal, setModal ] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  }
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -23,8 +29,11 @@ const MainNavigation = () => {
         </ul>
       </nav>
       <div className={styles.sidemenu}>
-        <Button>Log in</Button>
-        <Button className="btn--primary">Sign Up</Button>
+        <Button onClick={toggleModal}>Log in</Button>
+        <Button onClick={toggleModal} className="btn--primary">Sign Up</Button>
+        {modal && (
+        <Reg />
+      )}
       </div>
     </header>
   );
