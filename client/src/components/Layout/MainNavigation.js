@@ -1,15 +1,11 @@
 import { NavLink } from "react-router-dom";
-import Reg from "../Login/Login";
+import Registration from "../Login/Registration";
 import Button from "../FormElements/Button/Button";
 import { logo } from "../../images";
 import styles from "./MainNavigation.module.css";
 import { useEffect, useState } from "react";
 const MainNavigation = () => {
-    const [ modal, setModal ] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  }
+ const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <header className={styles.header}>
@@ -29,11 +25,22 @@ const MainNavigation = () => {
         </ul>
       </nav>
       <div className={styles.sidemenu}>
-        <Button onClick={toggleModal}>Log in</Button>
-        <Button onClick={toggleModal} className="btn--primary">Sign Up</Button>
-        {modal && (
-        <Reg />
-      )}
+        <Button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Log in
+        </Button>
+        <Button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+          className="btn--primary"
+        >
+          Sign Up
+        </Button>
+        {modalOpen && <Registration setOpenModal={setModalOpen} />}
       </div>
     </header>
   );
