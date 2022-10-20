@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 import Reg from "../Login/Login";
 import Button from "../FormElements/Button/Button";
-import { logo } from "../../images";
+import { simplifyLogo } from "../../images";
 import styles from "./MainNavigation.module.css";
 import { useEffect, useState } from "react";
 const MainNavigation = () => {
-    const [ modal, setModal ] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
-  }
+  };
 
   return (
     <header className={styles.header}>
@@ -17,7 +17,7 @@ const MainNavigation = () => {
         <ul>
           <li>
             <NavLink to="/">
-              <img src={logo} alt="logo" />
+              <img src={simplifyLogo} alt="logo" />
             </NavLink>
           </li>
           <li>
@@ -30,10 +30,10 @@ const MainNavigation = () => {
       </nav>
       <div className={styles.sidemenu}>
         <Button onClick={toggleModal}>Log in</Button>
-        <Button onClick={toggleModal} className="btn--primary">Sign Up</Button>
-        {modal && (
-        <Reg />
-      )}
+        <Button onClick={toggleModal} className="btn--primary">
+          Sign Up
+        </Button>
+        {modal && <Reg />}
       </div>
     </header>
   );
