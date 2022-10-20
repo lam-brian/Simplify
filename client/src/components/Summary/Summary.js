@@ -5,9 +5,14 @@ import styles from "./Summary.module.css";
 
 const Summary = () => {
   const [summary, setSummary] = useState("");
+  const [keywords, setKeywords] = useState([]);
 
   const retrieveSummaryHandler = (text) => {
     setSummary(text);
+  };
+
+  const retrieveKeywordsHandler = (wordsArray) => {
+    setKeywords(wordsArray);
   };
 
   return (
@@ -22,8 +27,11 @@ const Summary = () => {
         </p>
       </div>
       <div className={styles.summary}>
-        <SummaryForm onRetrieveSummary={retrieveSummaryHandler} />
-        <SummarizedContent summary={summary} />
+        <SummaryForm
+          onRetrieveSummary={retrieveSummaryHandler}
+          onRetrieveKeywords={retrieveKeywordsHandler}
+        />
+        <SummarizedContent summary={summary} keywords={keywords} />
       </div>
     </>
   );

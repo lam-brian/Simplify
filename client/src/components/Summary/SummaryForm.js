@@ -4,7 +4,7 @@ import Button from "../FormElements/Button/Button";
 import Input from "../FormElements/Input/Input";
 import styles from "./SummaryForm.module.css";
 
-const SummaryForm = ({ onRetrieveSummary }) => {
+const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
 
@@ -19,9 +19,9 @@ const SummaryForm = ({ onRetrieveSummary }) => {
       body: JSON.stringify({ text }),
     });
 
-    const data = await res.json();
-
-    onRetrieveSummary(data.summary);
+    const { summary, keywords } = await res.json();
+    onRetrieveSummary(summary);
+    onRetrieveKeywords(keywords);
   };
 
   const urlInputHandler = useCallback((input) => {
