@@ -1,6 +1,6 @@
 import Button from "../FormElements/Button/Button";
 import styles from "./SummarizedContent.module.css";
-import Reg from "../Login/Login";
+import Registration from "../Login/Registration";
 import { useState } from "react";
 
 const SummarizedContent = ({ summary, keywords }) => {
@@ -8,11 +8,9 @@ const SummarizedContent = ({ summary, keywords }) => {
     <button key={keyword.score}>{keyword.text}</button>
   ));
   console.log(keywords);
-  const [ modal, setModal ] = useState(false);
+ const [modalOpen, setModalOpen] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
-  }
+
   return (
     <div className={styles.content}>
       <div className={styles.paragraph}>
@@ -23,12 +21,16 @@ const SummarizedContent = ({ summary, keywords }) => {
         <h2>Key Highlights</h2>
         <div className={styles.tags}>{renderedKeywords}</div>
       </div>
-      <Button onClick={toggleModal} className="btn--primary">Save notes</Button>
-      
-      {modal && (
-        <Reg />
-      )}
+      <Button
+        className="btn--primary"
+        onClick={() => {
+          setModalOpen(true);
+        }}
+      >
+        Save notes
+      </Button>
 
+      {modalOpen && <Registration setOpenModal={setModalOpen} />}
     </div>
   );
 };
