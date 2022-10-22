@@ -13,7 +13,7 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
 
     if (!url && !text) return;
 
-    const res = await fetch("http://localhost:3001/notes", {
+    const res = await fetch("http://localhost:3001/api/notes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),

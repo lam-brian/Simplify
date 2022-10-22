@@ -18,7 +18,6 @@
   color: var(--white);
   padding: 1.2rem 2.6rem;
   border-radius: 6px;
-  width: 90%;
-  position: absolute;
-  bottom: 12%;
+  width: 100%;
+
 }

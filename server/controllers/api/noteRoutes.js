@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { Note } = require("../models");
-const summarize = require("../utils/summarize");
+const { Note } = require("../../models");
+const summarize = require("../../utils/summarize");
 
 router.get("/", async (req, res) => {
   const listOfNotes = await Note.findAll();
