@@ -99,9 +99,6 @@
 .checkbox {
   height: 24px;
   width: 24px;
-  position: absolute;
-  left: 7%;
-  bottom: 22%;
 }
 
 .term {
@@ -113,9 +110,7 @@
   font-size: 16px;
   line-height: 125%;
   color: #57595a;
-  position: absolute;
-  left: 15%;
-  bottom: 22%;
+  margin-bottom: 8%;
 }
 
 .account {
