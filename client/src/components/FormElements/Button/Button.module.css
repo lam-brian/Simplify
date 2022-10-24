@@ -4,6 +4,7 @@
   cursor: pointer;
   background: none;
   border: none;
+  color: var(--black);
 }
 
 .btn--primary {

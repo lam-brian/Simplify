@@ -1,11 +1,12 @@
+import { useState } from "react";
+
 import Button from "../FormElements/Button/Button";
 import styles from "./SummarizedContent.module.css";
 import Reg from "../Login/Login";
-import { useState } from "react";
 
 const SummarizedContent = ({ summary, keywords }) => {
   const renderedKeywords = keywords.map((keyword) => (
-    <button key={keyword.score}>{keyword.text}</button>
+    <Button key={keyword.score}>{keyword.text}</Button>
   ));
 
   const [modal, setModal] = useState(false);
