@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
 import Registration from "../Login/Registration";
 import Button from "../FormElements/Button/Button";
 import { simplifyLogo } from "../../images";
 import styles from "./MainNavigation.module.css";
-import { useEffect, useState } from "react";
+
 const MainNavigation = () => {
   const [modalOpen, setModalOpen] = useState(false);
 

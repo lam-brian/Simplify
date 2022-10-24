@@ -4,6 +4,7 @@
   cursor: pointer;
   background: none;
   border: none;
+  color: var(--black);
 }
 
 .btn--primary {
@@ -14,10 +15,9 @@
 }
 
 .btn--secondary {
-  background-color: #2A4988 ;
+  background-color: #2a4988;
   color: var(--white);
   padding: 1.2rem 2.6rem;
   border-radius: 6px;
   width: 100%;
-
 }
