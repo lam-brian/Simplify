@@ -10,8 +10,10 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      {isLoggedIn && <MainNavigation />}
-      <main className={styles.main}>{children}</main>
+      <div className={styles.container}>
+        {isLoggedIn && <MainNavigation />}
+        <main className={styles.main}>{children}</main>
+      </div>
     </>
   );
 };

@@ -11,7 +11,6 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const dispatch = useDispatch();
-
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,6 +25,7 @@ const Header = () => {
       >
         Log in
       </Button>
+
       <Button
         onClick={() => {
           setModalOpen(true);

@@ -1,3 +1,7 @@
+.container {
+  display: flex;
+}
+
 .main {
   max-width: 80%;
   margin: 4.8rem auto;
