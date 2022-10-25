@@ -1,11 +1,11 @@
 .container {
   box-sizing: border-box;
   display: flex;
-  padding: 48px 32px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 48px 32px;
   width: 490px;
   height: 691px;
   background: #ffffff;
@@ -20,8 +20,6 @@
   flex-direction: column;
   padding: 0px;
   gap: 24px;
-  width: 426px;
-  height: 595px;
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -40,29 +38,8 @@
   cursor: pointer;
 }
 
-.logo {
-  width: 106px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .signup {
-  width: 426px;
-  height: 31px;
-  font-family: "Lora";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 31px;
-  color: #2a4988;
-  transform: translate(25%);
-}
-
-.signin {
-  width: 426px;
-  height: 31px;
   font-family: "Lora";
   font-style: normal;
   font-weight: 600;
@@ -70,17 +47,28 @@
   line-height: 31px;
   color: #2a4988;
   transform: translate(40%);
+  margin-bottom: 7%;
+}
+
+.signin {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  color: #2a4988;
+  transform: translate(40%);
+  margin-bottom: 7%;
 }
 
 .label {
-  width: 426px;
-  height: 23px;
   font-family: "Lora";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 125%;
   color: #252428;
+  margin-top: 3%;
   margin-bottom: 3%;
 }
 
@@ -97,11 +85,15 @@
 }
 
 .checkbox {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
   height: 24px;
   width: 24px;
 }
 
 .term {
+  display: block;
   width: 320px;
   height: 20px;
   font-family: "Lora";
@@ -137,5 +129,12 @@
 }
 
 .register {
+  
   font-family: "Lora";
+  color: white;
+}
+
+.blue {
+  color: #2a4988;
+;
 }
