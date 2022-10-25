@@ -9,6 +9,10 @@ router.post("/", async (req, res) => {
 
   let rawText = text;
 
+  if (!url && !text) {
+    return res.status(400).json({ error: "No inputs" });
+  }
+
   try {
     if (url) rawText = await webscrape(url.trim());
   } catch (err) {

@@ -13,15 +13,25 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
 
     if (!url && !text) return;
 
-    const res = await fetch("http://localhost:3001/api/notes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
+    try {
+      const res = await fetch("http://localhost:3001/api/notes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, text }),
+      });
 
-    const { summary, keywords } = await res.json();
-    onRetrieveSummary(summary);
-    onRetrieveKeywords(keywords);
+      console.log(res);
+
+      if (!res.ok) {
+        throw new Error("Unable to summarize");
+      }
+
+      const { summary, keywords } = await res.json();
+      onRetrieveSummary(summary);
+      onRetrieveKeywords(keywords);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const urlInputHandler = useCallback((input) => {
