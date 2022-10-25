@@ -1,16 +1,18 @@
 .btn {
+  display: inline-block;
   font-size: inherit;
   font-family: inherit;
   cursor: pointer;
   background: none;
   border: none;
-  color: var(--black);
+  color: var(--primary-blue-dark);
+  font-weight: 600;
 }
 
 .btn--primary {
-  background-color: var(--black);
-  color: var(--white);
-  padding: 1.2rem 2.6rem;
+  background-color: var(--primary-blue-dark);
+  color: var(--primary-white);
+  padding: 1.2rem 2.4rem;
   border-radius: 6px;
 }
 
@@ -20,4 +22,13 @@
   padding: 1.2rem 2.6rem;
   border-radius: 6px;
   width: 100%;
+}
+
+.btn--avatar {
+  font-family: var(--font-fam-lora);
+  background-color: var(--primary-white);
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  font-size: 2.4rem;
 }

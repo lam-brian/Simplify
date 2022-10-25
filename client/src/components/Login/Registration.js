@@ -1,8 +1,8 @@
 import Button from "../FormElements/Button/Button";
 import styles from "./Registration.module.css";
 import { useState } from "react";
-import Vector from "../../images/close-circle.png";
-import { simplifyLogo } from "../../images";
+import Vector from "../../images/icons/close-circle.svg";
+import { logos } from "../../images";
 
 const Reg = ({ setOpenModal }) => {
   const [index, setindex] = useState(0);
@@ -57,7 +57,7 @@ const Reg = ({ setOpenModal }) => {
           >
             <img className={styles.vector} src={Vector} alt="" />
           </button>
-          <img className={styles.logo} src={simplifyLogo} alt="logo" />
+          <img className={styles.logo} src={logos.logo} alt="logo" />
           <div hidden={index !== 0}>
             <div className={styles.signup}>Sign up with Simplify</div>
             <form onSubmit={signupFormHandler}>
@@ -80,9 +80,10 @@ const Reg = ({ setOpenModal }) => {
                 className={styles.input}
                 placeholder="Password"
               />
-              
+
               <pre className={styles.term}>
-               <input className={styles.checkbox} type="checkbox" />    I accept the Terms of Use & Privacy Policy
+                <input className={styles.checkbox} type="checkbox" /> I accept
+                the Terms of Use & Privacy Policy
               </pre>
               <Button type="submit" className="btn--secondary">
                 <pre className={styles.register}>Sign Up →</pre>
@@ -117,9 +118,9 @@ const Reg = ({ setOpenModal }) => {
                 className={styles.input}
                 placeholder="Password"
               />
-            <Button type="submit" className="btn--secondary">
-              <pre className={styles.register}>Sign In →</pre>
-            </Button>
+              <Button type="submit" className="btn--secondary">
+                <pre className={styles.register}>Sign In →</pre>
+              </Button>
             </form>
             <div className={styles.account}>
               Go back to{" "}
