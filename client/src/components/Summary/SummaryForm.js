@@ -49,15 +49,16 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
         label="Paste URL"
         id="url"
         type="url"
+        placeholder="Paste URL here"
         onInput={urlInputHandler}
       />
-      <div className={styles.divider}>or</div>
       <Input
         element="textarea"
         label="Paste text"
         id="plainText"
         type="text"
-        rows="10"
+        rows="8"
+        placeholder="Type or paste your text here"
         onInput={textInputHandler}
       />
       <Button type="submit" className="btn--primary">

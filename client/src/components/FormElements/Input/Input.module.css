@@ -5,17 +5,20 @@
 }
 
 .form-control label {
-  margin-bottom: 0.4rem;
-  font-size: 1.4rem;
+  font-family: var(--font-fam-lora);
+  font-weight: 600;
+  margin-bottom: 1.2rem;
 }
 
 .form-control input,
 .form-control textarea {
   width: 100%;
   font: inherit;
-  padding: 0.8rem;
+  padding: 1.2rem;
   margin-bottom: 2.4rem;
-  border: 1px solid var(--grey);
+  border: 1px solid #b2b2b2;
+  border-radius: 6px;
+  color: var(--primary-black);
 }
 
 .form-control input :last-child,

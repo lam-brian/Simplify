@@ -4,7 +4,6 @@ import styles from "./Input.module.css";
 
 const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
   const [inputValue, setInputValue] = useState("");
-  const [isTouched, setIsTouched] = useState(false);
 
   useEffect(() => {
     onInput(inputValue);
@@ -14,10 +13,6 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
     setInputValue(e.target.value);
   };
 
-  const touchChangeHandler = () => {
-    setIsTouched(true);
-  };
-
   const renderedElement =
     element === "input" ? (
       <input
@@ -25,7 +20,6 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         type={type}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        onBlur={touchChangeHandler}
         value={inputValue}
       />
     ) : (
@@ -34,7 +28,6 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         rows={rows || 3}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        onBlur={touchChangeHandler}
         value={inputValue}
       />
     );

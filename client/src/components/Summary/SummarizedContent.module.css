@@ -1,37 +1,28 @@
 .content {
-  flex: 1 0 40%;
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  margin-bottom: 3.2rem;
+}
+
+.content > div {
+  flex-basis: 50%;
 }
 
 .content h2 {
-  font-size: 2rem;
-  margin-bottom: 3.1rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--primary-blue-dark);
 }
 
-.paragraph {
-  margin-bottom: 3.1rem;
-}
-
-.paragraph p {
-  line-height: 1.5;
+.tags button {
+  border: 1px solid var(--primary-blue-dark);
+  border-radius: 2.4rem;
+  padding: 0.8rem 1.6rem;
   font-size: 1.4rem;
-}
-
-.keywords {
-  width: 50%;
 }
 
 .tags {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.6rem;
   flex-wrap: wrap;
-  margin-bottom: 3.1rem;
-}
-
-.tags button {
-  font-size: 1.6rem;
-  color: #464646;
-  border: 1px solid rgba(31, 31, 31, 0.5);
-  border-radius: 100px;
-  padding: 1.2rem 1.6rem;
 }
