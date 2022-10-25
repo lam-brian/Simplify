@@ -48,7 +48,7 @@ const Reg = ({ setOpenModal }) => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.frame}>
+
           <button
             className={styles.close}
             onClick={() => {
@@ -57,9 +57,8 @@ const Reg = ({ setOpenModal }) => {
           >
             <img className={styles.vector} src={Vector} alt="" />
           </button>
-          <img className={styles.logo} src={logos.logo} alt="logo" />
           <div hidden={index !== 0}>
-            <div className={styles.signup}>Sign up with Simplify</div>
+            <div className={styles.signup}>Sign up</div>
             <form onSubmit={signupFormHandler}>
               <div className={styles.label}>Full name:</div>
               <input
@@ -82,8 +81,8 @@ const Reg = ({ setOpenModal }) => {
               />
 
               <pre className={styles.term}>
-                <input className={styles.checkbox} type="checkbox" /> I accept
-                the Terms of Use & Privacy Policy
+                <input className={styles.checkbox} type="checkbox" />   I accept
+                the <span className ={styles.blue}>Terms of Use</span> & <span className ={styles.blue}>Privacy Policy</span>
               </pre>
               <Button type="submit" className="btn--secondary">
                 <pre className={styles.register}>Sign Up →</pre>
@@ -134,7 +133,7 @@ const Reg = ({ setOpenModal }) => {
               </button>
             </div>
           </div>
-        </div>
+
       </div>
     </>
   );
