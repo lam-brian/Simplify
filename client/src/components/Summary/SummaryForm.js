@@ -1,18 +1,20 @@
 import { useState, useCallback } from "react";
 
 import Button from "../FormElements/Button/Button";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Input from "../FormElements/Input/Input";
 import styles from "./SummaryForm.module.css";
 
 const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
 
     if (!url && !text) return;
-
+    setIsLoading(true);
     try {
       const res = await fetch("http://localhost:3001/api/notes", {
         method: "POST",
@@ -29,7 +31,9 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
       const { summary, keywords } = await res.json();
       onRetrieveSummary(summary);
       onRetrieveKeywords(keywords);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   };
@@ -43,28 +47,31 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
   }, []);
 
   return (
-    <form className={styles.form} onSubmit={submitFormHandler}>
-      <Input
-        element="input"
-        label="Paste URL"
-        id="url"
-        type="url"
-        placeholder="Paste URL here"
-        onInput={urlInputHandler}
-      />
-      <Input
-        element="textarea"
-        label="Paste text"
-        id="plainText"
-        type="text"
-        rows="8"
-        placeholder="Type or paste your text here"
-        onInput={textInputHandler}
-      />
-      <Button type="submit" className="btn--primary">
-        Summarize
-      </Button>
-    </form>
+    <>
+      {isLoading && <LoadingSpinner isLoading={isLoading} />}
+      <form className={styles.form} onSubmit={submitFormHandler}>
+        <Input
+          element="input"
+          label="Paste URL"
+          id="url"
+          type="url"
+          placeholder="Paste URL here"
+          onInput={urlInputHandler}
+        />
+        <Input
+          element="textarea"
+          label="Paste text"
+          id="plainText"
+          type="text"
+          rows="8"
+          placeholder="Type or paste your text here"
+          onInput={textInputHandler}
+        />
+        <Button type="submit" className="btn--primary">
+          Summarize
+        </Button>
+      </form>
+    </>
   );
 };
 
