@@ -34,43 +34,35 @@ const extractParagraphs = (html) => {
     }
   }
 
-  return paragraphs.map((p) => p.trim().slice(0, -4));
+  return paragraphs.join(" ");
 };
 
 const removeTags = (paragraphs) => {
-  const paragraphsCopy = [...paragraphs];
+  const paragraphsCopy = paragraphs.slice();
 
-  for (let i = 0; i < paragraphsCopy.length; i++) {
-    const paragraph = paragraphsCopy[i];
+  let isTag = false;
+  let tagStr = "";
+  const tags = [];
 
-    if (!paragraph.includes("<") && !paragraph.includes(">")) continue;
-
-    let isTag = false;
-    let tagStr = "";
-    const tags = [];
-
-    for (const char of paragraph) {
-      if (char === "<") {
-        isTag = true;
-      }
-
-      if (isTag) {
-        tagStr += char;
-        if (char === ">") {
-          isTag = false;
-          tags.push(tagStr);
-          tagStr = "";
-        }
-      }
+  for (const char of paragraphsCopy) {
+    if (char === "<") {
+      isTag = true;
     }
 
-    let cleanParagraph = paragraph;
-    tags.forEach((tag) => (cleanParagraph = cleanParagraph.replace(tag, " ")));
-
-    paragraphsCopy[i] = cleanParagraph;
+    if (isTag) {
+      tagStr += char;
+      if (char === ">") {
+        isTag = false;
+        tags.push(tagStr);
+        tagStr = "";
+      }
+    }
   }
 
-  return paragraphsCopy.map((para) => para.replace(/\s+/g, " ").trim());
+  let cleanParagraph = paragraphsCopy;
+  tags.forEach((tag) => (cleanParagraph = cleanParagraph.replace(tag, " ")));
+
+  return cleanParagraph.replace(/\s+/g, " ").trim();
 };
 
 const webscrape = async (url) => {
@@ -89,9 +81,7 @@ const webscrape = async (url) => {
 
     const newParagraphs = removeTags(paragraphs);
 
-    const joinedParagraphs = newParagraphs.join(" ");
-
-    return joinedParagraphs;
+    return newParagraphs;
   } catch (err) {
     throw err;
   }
