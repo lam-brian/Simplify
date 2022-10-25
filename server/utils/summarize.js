@@ -120,7 +120,7 @@ const summarize = async (rawText) => {
     const [tokens, keywords] = results.map((res) => res.result);
 
     if (!tokens || !tokens.length || !keywords || !keywords.length) {
-      throw new Error("Error fetching data");
+      throw new Error("Error fetching summary data");
     }
 
     const freqTable = createFreqTable(tokens);
@@ -135,13 +135,13 @@ const summarize = async (rawText) => {
 
     const filteredKeywords = keywords.filter((keyword) => keyword.score > 0.6);
 
-    if (!summary) {
+    if (!summary || (!filteredKeywords && !filteredKeywords.length)) {
       throw new Error("Unable to summarize");
     }
 
     return { summary, keywords: filteredKeywords };
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 

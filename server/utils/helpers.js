@@ -16,13 +16,15 @@ const fetchData = async (url, method = "GET", headers = {}, data = null) => {
 
     const responseData = response.data;
 
-    if (!responseData || responseData.status === "ZERO_RESULTS") {
+    if (!responseData) {
       throw new Error("Error fetching data");
     }
 
     return responseData;
   } catch (err) {
-    throw new Error("Error fetching data");
+    if (err.response) {
+      throw new Error("something went wrong");
+    }
   }
 };
 

@@ -65,12 +65,12 @@ const removeTags = (paragraphs) => {
     }
 
     let cleanParagraph = paragraph;
-    tags.forEach((tag) => (cleanParagraph = cleanParagraph.replace(tag, "")));
+    tags.forEach((tag) => (cleanParagraph = cleanParagraph.replace(tag, " ")));
 
-    paragraphsCopy[i] = cleanParagraph.trim();
+    paragraphsCopy[i] = cleanParagraph;
   }
 
-  return paragraphsCopy;
+  return paragraphsCopy.map((para) => para.replace(/\s+/g, " ").trim());
 };
 
 const webscrape = async (url) => {

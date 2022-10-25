@@ -2,11 +2,32 @@ const router = require("express").Router();
 const { Note, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 const summarize = require("../../utils/summarize");
+const webscrape = require("../../utils/webscrape");
 
 router.post("/", async (req, res) => {
-  const { text } = req.body;
-  const { summary, keywords } = await summarize(text);
-  res.json({ summary, keywords });
+  const { url, text } = req.body;
+
+  let rawText = text;
+
+  try {
+    if (url) rawText = await webscrape(url.trim());
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+
+  let summaryData;
+
+  try {
+    summaryData = await summarize(rawText);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+
+  if (!summaryData.summary || !summaryData.keywords) {
+    return res.status(400).json({ error: "Unable to summarize" });
+  }
+
+  res.json(summaryData);
 });
 
 router.post("/newNote", withAuth, async (req, res) => {
@@ -15,12 +36,11 @@ router.post("/newNote", withAuth, async (req, res) => {
       ...req.body,
       user_id: req.session.user_id,
     });
-    console.log(newNote)
+    console.log(newNote);
     res.status(200).json(newNote);
   } catch (err) {
     res.status(400).json(err);
   }
 });
-
 
 module.exports = router;
