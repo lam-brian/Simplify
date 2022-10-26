@@ -24,8 +24,9 @@ const Summary = () => {
         onRetrieveSummary={retrieveSummaryHandler}
         onRetrieveKeywords={retrieveKeywordsHandler}
       />
-
-      <SummarizedContent summary={summary} keywords={keywords} />
+      {summary && keywords.length > 0 && (
+        <SummarizedContent summary={summary} keywords={keywords} />
+      )}
     </>
   );
 };

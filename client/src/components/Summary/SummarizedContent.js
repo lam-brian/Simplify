@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Button from "../FormElements/Button/Button";
 import styles from "./SummarizedContent.module.css";
@@ -15,11 +15,11 @@ const SummarizedContent = ({ summary, keywords }) => {
   return (
     <div>
       <div className={styles.content}>
-        <Accordion title="Summary">{summary && <p>{summary}</p>}</Accordion>
+        <Accordion title="Summary">
+          <p>{summary}</p>
+        </Accordion>
         <Accordion title="Key Highlights">
-          {keywords.length > 0 && (
-            <div className={styles.tags}>{renderedKeywords}</div>
-          )}
+          <div className={styles.tags}>{renderedKeywords}</div>
         </Accordion>
       </div>
 

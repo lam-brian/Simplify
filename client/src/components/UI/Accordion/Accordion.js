@@ -1,21 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { icons } from "../../../images";
 import styles from "./Accordion.module.css";
 
 const Accordion = ({ title, children, onOpenTab }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
-  const openTab = () => {
+  const toggleTab = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    if (children) setIsOpen(true);
-  }, [children]);
-
   return (
     <div className={styles.accordion}>
-      <div className={styles.tab} onClick={openTab}>
+      <div className={styles.tab} onClick={toggleTab}>
         <h2>{title}</h2>
         <img src={isOpen ? icons.arrowUp : icons.arrowDown} alt="open tab" />
       </div>
@@ -24,7 +20,7 @@ const Accordion = ({ title, children, onOpenTab }) => {
           isOpen ? `${styles.content} ${styles.active}` : styles.content
         }
       >
-        {children && <div>{children}</div>}
+        <div>{children}</div>
       </div>
     </div>
   );
