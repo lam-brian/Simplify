@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loginActions } from "../../store/login-slice";
-
+import Dropdown from "./Dropdown";
 import Registration from "../Login/Registration";
 import Button from "../FormElements/Button/Button";
 import { ReactComponent as SearchIcon } from "../../images/icons/search.svg";
@@ -10,17 +9,24 @@ import { logos } from "../../images";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const dispatch = useDispatch();
+   const [modalOpen, setModalOpen] = useState(false);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-
-  const [modalOpen, setModalOpen] = useState(false);
+  const [settingOpen, setSettingOpen] = useState(false);
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (e.path[0].tagName !== 'BUTTON') {
+          setSettingOpen(false);
+      }
+    };
+    document.body.addEventListener("click", closeDropdown);
+    return () => document.body.removeEventListener('click', closeDropdown)
+  }, []);
 
   let actions = (
     <>
       <Button
         onClick={() => {
-          // setModalOpen(true);
-          dispatch(loginActions.login());
+          setModalOpen(true);
         }}
       >
         Log in
@@ -41,11 +47,20 @@ const Header = () => {
   if (isLoggedIn) {
     actions = (
       <>
-        <Button onClick={() => dispatch(loginActions.logout())}>
+        <Button>
           <SearchIcon />
         </Button>
-
-        <Button className="btn--avatar">B</Button>
+        <div className="dropdown">
+          <Button
+            onClick={() => {
+              setSettingOpen(true);
+            }}
+            className="btn--avatar"
+          >
+            B
+          </Button>
+          {settingOpen && <Dropdown setOpenModal={setSettingOpen} />}
+        </div>
       </>
     );
   }
