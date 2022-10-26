@@ -19,6 +19,7 @@ import logout from "./icons/logout.svg";
 import notification from "./icons/notification.svg";
 import plus from "./icons/plus.svg";
 import search from "./icons/search.svg";
+import settings from "./icons/settings.svg";
 import star from "./icons/star.svg";
 import user from "./icons/user.svg";
 
@@ -37,6 +38,7 @@ export const icons = {
   notification,
   plus,
   search,
+  settings,
   star,
   user,
 };

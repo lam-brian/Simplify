@@ -52,6 +52,10 @@
   font-size: 2.4rem;
 }
 
+.btn--favorite svg {
+  fill: none;
+}
+
 .btn svg {
   transition: all 0.3s ease-out;
 }

@@ -6,6 +6,7 @@ import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import NewNote from "./pages/NewNote";
 import Setting from "./pages/Setting";
+import ActiveNote from "./pages/ActiveNote";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/summarize" />} />
         <Route path="/summarize" element={<Summarize />} />
         <Route path="/new-note" element={<NewNote />} />
+        <Route path="/note/:noteId" element={<ActiveNote />} />
       </>
     );
   }

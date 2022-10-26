@@ -6,6 +6,7 @@
   background-color: var(--primary-blue-light);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1.6rem 1.2rem;
 }
 
@@ -43,4 +44,19 @@
   resize: none;
   border: none;
   border-left: 2px solid #2a498881;
+}
+
+.inactive textarea:focus {
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.active textarea {
+  border: 2px solid var(--primary-blue-dark);
+  outline: none;
+  border-radius: 6px;
 }
