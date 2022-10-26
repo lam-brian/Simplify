@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import Summarize from "./pages/Summarize";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
+import Setting from "./pages/Setting";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -17,6 +17,8 @@ function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/summarize" element={<Summarize />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/setting" element = {<Setting/>}/>
+    
       </>
     );
   } else {
