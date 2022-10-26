@@ -13,13 +13,14 @@ const ChangePassword = ({ setOpenModal }) => {
           <img className={styles.vector} src={Vector} alt="" />
         </button>
         <h1>Change your password</h1>
-        <div className={styles.label}>Current Password</div>
+        <form>
+          <div className={styles.label}>Current password</div>
         <input type="password" className={styles.input} />
-        <div className={styles.label}>New Password</div>
+        <div className={styles.label}>New password</div>
         <input type="password" className={styles.input} />
-        <div className={styles.label}>Repeat New Password</div>
-        <input type="password" className={styles.input} />
-        <button
+        <div className={styles.label}>Repeat new password</div>
+          <input type="password" className={styles.input} />
+          <button
           className={styles.delete}
           onClick={() => {
             setOpenModal(false);
@@ -27,6 +28,9 @@ const ChangePassword = ({ setOpenModal }) => {
         >
           Set new password
         </button>
+        </form>
+
+
       </div>
     </>
   );

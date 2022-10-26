@@ -28,45 +28,29 @@ height: 253px;
     display: flex;
 flex-direction: column;
 align-items: flex-start;
-padding: 0px;
+
 gap: 8px;
 
 width: 452px;
 height: 94px;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
 z-index: 0;
 }
 
-.heading h3 {
-    width: 452px;
-height: 48px;
+.heading h2 {
+font-family: 'Lora';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
 
-/* Body/Body-2 */
+text-align: center;
+color: #252428;
+}
 
+.heading h6 {
 font-family: 'Open Sans';
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
 line-height: 150%;
-/* or 24px */
-
-
-/* Primary/Black */
-
 color: #252428;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
 }
