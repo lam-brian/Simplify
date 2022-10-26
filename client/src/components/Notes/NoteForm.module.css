@@ -1,0 +1,77 @@
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+  padding: 1.6rem 0;
+}
+
+.heading h1 {
+  color: var(--primary-blue-dark);
+}
+
+.buttons {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.formInputs {
+  display: flex;
+  align-items: center;
+}
+
+.formInputs label {
+  font-size: 2rem;
+  font-family: var(--font-fam-lora);
+  color: var(--primary-black);
+  font-size: 2rem;
+}
+
+.formInputs input,
+.formInputs textarea {
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
+}
+
+.title {
+  gap: 7.4rem;
+  margin-bottom: 3.2rem;
+}
+
+.title input {
+  padding: 0.8rem 1.2rem;
+  border-radius: 2px;
+}
+
+.summary {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 3.2rem;
+}
+
+.summary textarea {
+  padding: 3.2rem 2.4rem;
+  resize: none;
+}
+
+.highlights {
+  border: none;
+  margin-bottom: 2.4rem;
+}
+
+.highlights legend {
+  font-family: var(--font-fam-lora);
+  font-size: 2rem;
+  pointer-events: none;
+  margin-bottom: 1.2rem;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}

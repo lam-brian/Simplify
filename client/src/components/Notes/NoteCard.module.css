@@ -1,0 +1,46 @@
+.noteCard {
+  box-shadow: 0 4px 13px rgba(29, 66, 109, 0.25);
+}
+
+.header {
+  background-color: var(--primary-blue-light);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.6rem 1.2rem;
+}
+
+.header span {
+  font-size: 1.8rem;
+  color: var(--primary-blue-dark);
+  font-weight: 600;
+  font-family: var(--font-fam-lora);
+}
+
+.header svg {
+  stroke: var(--primary-grey-dark);
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-white);
+  padding: 2.4rem 1.2rem;
+  position: relative;
+}
+
+.content label {
+  background-color: var(--primary-white);
+  flex: 10 25%;
+  font-weight: 600;
+}
+
+.content textarea {
+  font: inherit;
+  padding: 1.2rem;
+  padding-left: 2.4rem;
+  flex: 1 0 75%;
+  resize: none;
+  border: none;
+  border-left: 2px solid #2a498881;
+}

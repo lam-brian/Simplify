@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Summarize from "./pages/Summarize";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
+import NewNote from "./pages/NewNote";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -14,7 +15,7 @@ function App() {
   if (isLoggedIn) {
     routes = (
       <>
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="/summarize" element={<Summarize />} />
         <Route path="/home" element={<HomePage />} />
       </>
@@ -22,8 +23,9 @@ function App() {
   } else {
     routes = (
       <>
-        <Route path="/" element={<Navigate to="/summarize" />} />
+        <Route path="/" element={<Navigate replace to="/summarize" />} />
         <Route path="/summarize" element={<Summarize />} />
+        <Route path="/new-note" element={<NewNote />} />
       </>
     );
   }

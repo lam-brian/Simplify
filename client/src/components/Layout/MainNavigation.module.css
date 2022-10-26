@@ -28,13 +28,13 @@
   font-size: 2rem;
   text-decoration: none;
   font-family: var(--font-fam-lora);
-  color: var(--primary-grey-dark);
+  color: var(--primary-grey-light);
   padding: 1.2rem;
   border-radius: 6px;
 }
 
 .nav svg {
-  stroke: var(--primary-grey-dark);
+  stroke: var(--primary-grey-light);
 }
 
 .nav a:hover,

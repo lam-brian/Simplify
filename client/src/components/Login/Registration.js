@@ -48,92 +48,99 @@ const Reg = ({ setOpenModal }) => {
   return (
     <>
       <div className={styles.container}>
+        <button
+          className={styles.close}
+          onClick={() => {
+            setOpenModal(false);
+          }}
+        >
+          <img className={styles.vector} src={Vector} alt="" />
+        </button>
+        <div hidden={index !== 0}>
+          <div className={styles.signup}>Sign up</div>
+          <form onSubmit={signupFormHandler}>
+            <div className={styles.label}>Full name:</div>
+            <input
+              id="name-signup"
+              className={styles.input}
+              placeholder="John Smith"
+            />
+            <div className={styles.label}>Email:</div>
+            <input
+              id="email-signup"
+              className={styles.input}
+              placeholder="johnsmith@gmail.com"
+            />
+            <div className={styles.label}>Password:</div>
+            <input
+              id="password-signup"
+              type="password"
+              className={styles.input}
+              placeholder="Password"
+            />
 
-          <button
-            className={styles.close}
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          >
-            <img className={styles.vector} src={Vector} alt="" />
-          </button>
-          <div hidden={index !== 0}>
-            <div className={styles.signup}>Sign up</div>
-            <form onSubmit={signupFormHandler}>
-              <div className={styles.label}>Full name:</div>
-              <input
-                id="name-signup"
-                className={styles.input}
-                placeholder="John Smith"
-              />
-              <div className={styles.label}>Email:</div>
-              <input
-                id="email-signup"
-                className={styles.input}
-                placeholder="johnsmith@gmail.com"
-              />
-              <div className={styles.label}>Password:</div>
-              <input
-                id="password-signup"
-                type="password"
-                className={styles.input}
-                placeholder="Password"
-              />
+            <pre className={styles.term}>
+              <input className={styles.checkbox} type="checkbox" /> I accept the{" "}
+              <span className={styles.blue}>Terms of Use</span> &{" "}
+              <span className={styles.blue}>Privacy Policy</span>
+            </pre>
+            <Button
+              type="submit"
+              className="btn--primary"
+              style={{ width: "100%" }}
+            >
+              <pre className={styles.register}>Sign Up →</pre>
+            </Button>
+          </form>
 
-              <pre className={styles.term}>
-                <input className={styles.checkbox} type="checkbox" />   I accept
-                the <span className ={styles.blue}>Terms of Use</span> & <span className ={styles.blue}>Privacy Policy</span>
-              </pre>
-              <Button type="submit" className="btn--secondary">
-                <pre className={styles.register}>Sign Up →</pre>
-              </Button>
-            </form>
-
-            <div className={styles.account}>
-              Have an account already?{" "}
-              <button
-                className={styles.login}
-                onClick={() => {
-                  setindex(1);
-                }}
-              >
-                Log in
-              </button>
-            </div>
+          <div className={styles.account}>
+            Have an account already?{" "}
+            <button
+              className={styles.login}
+              onClick={() => {
+                setindex(1);
+              }}
+            >
+              Log in
+            </button>
           </div>
-          <div hidden={index !== 1}>
-            <div className={styles.signin}>Sign in</div>
-            <form onSubmit={loginFormHandler}>
-              <div className={styles.label}>Email:</div>
-              <input
-                id="email-login"
-                className={styles.input}
-                placeholder="johnsmith@gmail.com"
-              />
-              <div className={styles.label}>Password:</div>
-              <input
-                id="password-login"
-                type="password"
-                className={styles.input}
-                placeholder="Password"
-              />
-              <Button type="submit" className="btn--secondary">
-                <pre className={styles.register}>Sign In →</pre>
-              </Button>
-            </form>
-            <div className={styles.account}>
-              Go back to{" "}
-              <button
-                className={styles.login}
-                onClick={() => {
-                  setindex(0);
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
+        </div>
+        <div hidden={index !== 1}>
+          <div className={styles.signin}>Sign in</div>
+          <form onSubmit={loginFormHandler}>
+            <div className={styles.label}>Email:</div>
+            <input
+              id="email-login"
+              className={styles.input}
+              placeholder="johnsmith@gmail.com"
+            />
+            <div className={styles.label}>Password:</div>
+            <input
+              id="password-login"
+              type="password"
+              className={styles.input}
+              placeholder="Password"
+            />
+            <Button
+              type="submit"
+              className="btn--primary"
+              style={{ width: "100%" }}
+            >
+              <pre className={styles.register}>Sign In →</pre>
+            </Button>
+          </form>
+          <div className={styles.account}>
+            Go back to{" "}
+            <button
+              className={styles.login}
+              onClick={() => {
+                setindex(0);
+              }}
+            >
+              Sign Up
+            </button>
           </div>
-
+        </div>
       </div>
     </>
   );

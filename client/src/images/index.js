@@ -17,6 +17,7 @@ import eye from "./icons/eye.svg";
 import home from "./icons/home.svg";
 import logout from "./icons/logout.svg";
 import notification from "./icons/notification.svg";
+import plus from "./icons/plus.svg";
 import search from "./icons/search.svg";
 import star from "./icons/star.svg";
 import user from "./icons/user.svg";
@@ -34,6 +35,7 @@ export const icons = {
   home,
   logout,
   notification,
+  plus,
   search,
   star,
   user,
