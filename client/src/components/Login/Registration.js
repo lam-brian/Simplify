@@ -3,10 +3,12 @@ import styles from "./Registration.module.css";
 import { useState } from "react";
 import Vector from "../../images/icons/close-circle.svg";
 import { logos } from "../../images";
+import { useSelector, useDispatch } from "react-redux";
+import { loginActions } from "../../store/login-slice";
 
-const Reg = ({ setOpenModal }) => {
+const Registration = ({ setOpenModal }) => {
   const [index, setindex] = useState(0);
-
+  const dispatch = useDispatch();
   const loginFormHandler = async (event) => {
     event.preventDefault();
     const email = document.getElementById("email-login").value.trim();
@@ -19,7 +21,8 @@ const Reg = ({ setOpenModal }) => {
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
-        document.location.replace("/home");
+        dispatch(loginActions.login());
+        setOpenModal(false);
       } else {
         alert(response.statusText);
       }
@@ -38,7 +41,8 @@ const Reg = ({ setOpenModal }) => {
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
-        document.location.replace("/home");
+        dispatch(loginActions.login());
+        setOpenModal(false);
       } else {
         alert(response.statusText);
       }
@@ -146,4 +150,4 @@ const Reg = ({ setOpenModal }) => {
   );
 };
 
-export default Reg;
+export default Registration;
