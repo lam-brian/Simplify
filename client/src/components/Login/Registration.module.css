@@ -28,16 +28,17 @@
 }
 
 .close {
+  cursor: pointer;
   border-style: none;
-}
-
-.vector {
   position: absolute;
   right: 8.33%;
   top: 5%;
-  cursor: pointer;
+  background: none;
 }
 
+.close svg {
+  stroke: var(--primary-grey-light) !important;
+}
 
 .signup {
   font-family: "Lora";
@@ -46,7 +47,7 @@
   font-size: 24px;
   line-height: 31px;
   color: #2a4988;
-  transform: translate(40%);
+  text-align: center;
   margin-bottom: 7%;
 }
 
@@ -129,12 +130,10 @@
 }
 
 .register {
-  
   font-family: "Lora";
   color: white;
 }
 
 .blue {
   color: #2a4988;
-;
 }

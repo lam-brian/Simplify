@@ -1,10 +1,11 @@
-import Button from "../FormElements/Button/Button";
-import styles from "./Registration.module.css";
 import { useState } from "react";
-import Vector from "../../images/icons/close-circle.svg";
-import { logos } from "../../images";
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login-slice";
+
+import Button from "../FormElements/Button/Button";
+import { ReactComponent as CloseIcon } from "../../images/icons/close-circle.svg";
+import { logos } from "../../images";
+import styles from "./Registration.module.css";
 
 const Registration = ({ setOpenModal }) => {
   const [index, setindex] = useState(0);
@@ -58,7 +59,7 @@ const Registration = ({ setOpenModal }) => {
             setOpenModal(false);
           }}
         >
-          <img className={styles.vector} src={Vector} alt="" />
+          <CloseIcon />
         </button>
         <div hidden={index !== 0}>
           <div className={styles.signup}>Sign up</div>
