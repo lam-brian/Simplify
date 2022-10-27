@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Note extends Model {}
 
@@ -18,12 +18,20 @@ Note.init(
     summary: {
       type: DataTypes.STRING,
     },
+    highlights: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id',
+        model: "user",
+        key: "id",
       },
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
@@ -31,7 +39,7 @@ Note.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'note',
+    modelName: "note",
   }
 );
 

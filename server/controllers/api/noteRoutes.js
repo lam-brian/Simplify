@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
   res.json(summaryData);
 });
 
-router.post("/newNote", withAuth, async (req, res) => {
+router.post("/newNote", async (req, res) => {
   try {
     const newNote = await Note.create({
       ...req.body,
