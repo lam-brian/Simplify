@@ -4,9 +4,9 @@ import DeleteAccount from "./DeleteAccount";
 import { useState } from "react";
 import Helmet from "react-helmet";
 
-const Settings = () => {
-  const [modalOpen, setModalOpen] = useState(false); 
-  const [openDelete, setOpenDelete] = useState(false)
+const Settings = ({ username, email }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
       <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
@@ -20,15 +20,11 @@ const Settings = () => {
             <input
               id="name"
               type="text"
-              value="John Smith"
+              value={username}
               className={styles.input}
             />
             <div className={styles.label}>Email</div>
-            <input
-              id="email"
-              value="johnsmith@gmail.com"
-              className={styles.input}
-            />
+            <input id="email" value={email} className={styles.input} />
             <div className={styles.label}>Password</div>
             <button
               onClick={() => {

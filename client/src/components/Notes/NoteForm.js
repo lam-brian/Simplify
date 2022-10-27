@@ -6,7 +6,7 @@ import NoteCard from "./NoteCard";
 import Button from "../FormElements/Button/Button";
 import { icons } from "../../images";
 import styles from "./NoteForm.module.css";
-import { noteActions } from "../../store/note-slice";
+import { noteActions, saveNoteToDB } from "../../store/note-slice";
 
 const NoteForm = ({ summary, keywords }) => {
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const NoteForm = ({ summary, keywords }) => {
     dispatch(noteActions.saveNote({ summary: "", keywords: [] }));
   };
 
-  const submitFormHandler = (e) => {
+  const submitFormHandler = async (e) => {
     e.preventDefault();
 
     let keywordsIsValid = true;
@@ -86,13 +86,20 @@ const NoteForm = ({ summary, keywords }) => {
     const note = {
       title: enteredTitle,
       summary: enteredSummary,
-      keywords: highlights,
+      highlights,
     };
 
-    console.log(note);
+    const response = await fetch("http://localhost:3001/api/notes/newNote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(note),
+    });
 
-    dispatch(noteActions.addNote(note));
-    navigate("/");
+    const data = await response.json();
+
+    console.log(data);
+    // dispatch(saveNoteToDB(note));
+    // navigate("/");
   };
 
   useEffect(() => {

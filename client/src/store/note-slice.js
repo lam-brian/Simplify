@@ -5,28 +5,7 @@ const noteSlice = createSlice({
   initialState: {
     isNoteMode: false,
     newNote: {},
-    notes: [
-      {
-        title: "test",
-        summary: "hello worlds",
-        keywords: [
-          { word: "text", score: "23", definition: "testing23" },
-          { word: "helo", score: "1", definition: "testing23" },
-        ],
-        date: "2022-10-27T05:21:38.841Z",
-        id: "1",
-      },
-      {
-        title: "1232132",
-        summary: "hello worlds",
-        keywords: [
-          { word: "text", score: "23", definition: "testing23" },
-          { word: "helo", score: "1", definition: "testing23" },
-        ],
-        date: "2022-10-27T05:21:38.841Z",
-        id: "2",
-      },
-    ],
+    notes: [],
   },
   reducers: {
     enterNote(state) {
@@ -73,5 +52,23 @@ const noteSlice = createSlice({
 });
 
 export const noteActions = noteSlice.actions;
+
+export const saveNoteToDB = (note) => {
+  return (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch("http://localhost:3001/api/notes/newNote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(note),
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+    };
+
+    sendRequest();
+  };
+};
 
 export default noteSlice;

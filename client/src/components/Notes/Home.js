@@ -12,6 +12,9 @@ const Home = ({ notes, user }) => {
   const [showSortOptions, setShowSortOptions] = useState(false);
   const sortRef = useRef(null);
 
+  const firstName =
+    user.username[0].toUpperCase() + user.username.split(" ")[0].slice(1);
+
   const toggleShowSortOptions = () => {
     setShowSortOptions((prevState) => !prevState);
   };
@@ -45,7 +48,7 @@ const Home = ({ notes, user }) => {
       <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
       <div className={styles.banner}>
         <div className={styles.heading}>
-          <h1>Welcome back, {user}</h1>
+          <h1>Welcome back, {firstName}</h1>
           <p>Let's start studying</p>
         </div>
         <div className={styles.illustration}>

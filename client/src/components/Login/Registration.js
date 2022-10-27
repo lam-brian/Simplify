@@ -21,8 +21,12 @@ const Registration = ({ setOpenModal }) => {
         body: JSON.stringify({ email, password }),
         headers: { "Content-Type": "application/json" },
       });
+
       if (response.ok) {
-        dispatch(loginActions.login());
+        const data = await response.json();
+        const { id, name, email } = data.user;
+        console.log(id, name, email);
+        dispatch(loginActions.login({ id, username: name, email }));
         setOpenModal(false);
       } else {
         alert(response.statusText);
@@ -42,7 +46,9 @@ const Registration = ({ setOpenModal }) => {
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
-        dispatch(loginActions.login());
+        const data = await response.json();
+        const { id, name, email } = data.user;
+        dispatch(loginActions.login({ id, username: name, email }));
         setOpenModal(false);
       } else {
         alert(response.statusText);
