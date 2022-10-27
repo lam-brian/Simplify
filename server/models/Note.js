@@ -16,9 +16,9 @@ Note.init(
       allowNull: false,
     },
     summary: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT("LONG"),
     },
-    highlight: {
+    highlights: {
       type: DataTypes.JSON,
       allowNull: false,
     },
