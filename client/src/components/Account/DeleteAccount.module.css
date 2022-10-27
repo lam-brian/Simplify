@@ -5,9 +5,9 @@
   transform: translate(-50%, -50%);
   padding: 24px 36px;
   text-align: left;
-  gap: 24px;
-width: 500px;
-height: 253px;
+  gap: 50px;
+  width: 500px;
+  height: 253px;
   background: #ffffff;
   box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
   border-radius: 16px;
@@ -15,6 +15,10 @@ height: 253px;
 
 .close {
   border-style: none;
+  position: absolute;
+  right: 3.33%;
+  top: 5%;
+  cursor: pointer;
 }
 
 .vector {
@@ -24,33 +28,65 @@ height: 253px;
   cursor: pointer;
 }
 
-.heading {
-    display: flex;
-flex-direction: column;
-align-items: flex-start;
-
-gap: 8px;
-
-width: 452px;
-height: 94px;
-z-index: 0;
+.account {
+  width: 215px;
+  height: 38px;
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 125%;
+  color: #252428;
+  margin-bottom: 2%;
 }
 
-.heading h2 {
-font-family: 'Lora';
-font-style: normal;
-font-weight: 700;
-font-size: 30px;
-
-text-align: center;
-color: #252428;
+.warning {
+  width: 452px;
+  height: 48px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: #252428;
+  margin-bottom: 3%;
 }
 
-.heading h6 {
-font-family: 'Open Sans';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 150%;
-color: #252428;
+.confirm {
+  width: 320px;
+  height: 21px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #808081;
+  margin-bottom: 3%;
+}
+
+.input {
+  display: inline-block;
+  width: 70%;
+  height: 54px;
+  padding: 0.8rem;
+  background: #ffffff;
+  border: 1px solid #b2b2b2;
+  border-radius: 6px;
+}
+
+.delete {
+  position: absolute;
+  border: none;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 54px;
+  margin-bottom: 2%;
+  color: #ffffff;
+  background: #dd4d42;
+  border-radius: 6px;
+}
+
+.container form {
+  position: relative;
 }

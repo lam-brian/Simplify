@@ -2,12 +2,14 @@ import styles from "./Settings.module.css";
 import ChangePassword from "./ChangePassword";
 import DeleteAccount from "./DeleteAccount";
 import { useState } from "react";
+import Helmet from "react-helmet";
 
 const Settings = () => {
   const [modalOpen, setModalOpen] = useState(false); 
   const [openDelete, setOpenDelete] = useState(false)
   return (
     <>
+      <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
       <div className={styles.container}>
         Account Setting
         <div className={styles.avatar}>B</div>
@@ -34,7 +36,7 @@ const Settings = () => {
               }}
               className={styles.button}
             >
-              Change Password
+              Change password
             </button>
             {modalOpen && <ChangePassword setOpenModal={setModalOpen} />}
           </div>
