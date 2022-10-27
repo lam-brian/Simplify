@@ -1,9 +1,10 @@
 import styles from "./Home.module.css"
 import Typing from "../../images/typing.png"
 import Notes from "./Notes"
-
+import useEffect from "react-dom"
 
 const Home = () => {
+
     return (
       <>
         <div className={styles.container}>

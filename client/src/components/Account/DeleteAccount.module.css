@@ -1,0 +1,56 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px 36px;
+  text-align: left;
+  gap: 24px;
+width: 500px;
+height: 253px;
+  background: #ffffff;
+  box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
+  border-radius: 16px;
+}
+
+.close {
+  border-style: none;
+}
+
+.vector {
+  position: absolute;
+  right: 8.33%;
+  top: 5%;
+  cursor: pointer;
+}
+
+.heading {
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+
+gap: 8px;
+
+width: 452px;
+height: 94px;
+z-index: 0;
+}
+
+.heading h2 {
+font-family: 'Lora';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+
+text-align: center;
+color: #252428;
+}
+
+.heading h6 {
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 150%;
+color: #252428;
+}
