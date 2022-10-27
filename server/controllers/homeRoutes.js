@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const { Note, User, Keyword } = require("../models");
 
-router.get("/", async (req, res) => {
+router.get("/notes", async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Note }],
-    });
-
-    const user = userData.get({ plain: true });
-    console.log(user);
+    const notes = await Note.findAll({ include: User });
+    res.json(notes);
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      message: "Couldn't get notes.",
+    });
   }
 });
+
+
 
 module.exports = router;

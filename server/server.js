@@ -12,22 +12,28 @@ const PORT = process.env.PORT || 3001;
 
 
 const sess = {
-  secret: 'Super secret secret',
+  secret: "Super secret secret",
   cookie: {
-    maxAge: 3600000,
+    maxAge: 86400000,
     httpOnly: true,
     secure: false,
-    sameSite: 'strict',
+    sameSite: "strict",
   },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true,
+  })
+);
 
 app.use(session(sess));
-app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

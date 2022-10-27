@@ -9,6 +9,7 @@ import { illustrations } from "../../images";
 import styles from "./Home.module.css";
 
 const Home = ({ notes, user }) => {
+
   const [showSortOptions, setShowSortOptions] = useState(false);
   const sortRef = useRef(null);
 
