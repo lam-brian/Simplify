@@ -1,22 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import NoteCard from "./NoteCard";
 import Button from "../FormElements/Button/Button";
 import { icons } from "../../images";
 import styles from "./NoteForm.module.css";
+import { noteActions } from "../../store/note-slice";
 
-const text = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed tempora alias quis, suscipit consequuntur unde! Neque laudantium, quod, adipisci tempore rerum totam expedita nobis quidem ullam debitis officiis`;
+const NoteForm = ({ summary, keywords }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const DUMMY_KEYWORDS = ["hello", "testing", "highlights"];
-
-const NoteForm = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredSummary, setEnteredSummary] = useState(text);
+  const [enteredSummary, setEnteredSummary] = useState(summary);
+  const [highlights, setHighlights] = useState(keywords);
   const textAreaRef = useRef(null);
-
-  const renderedCards = DUMMY_KEYWORDS.map((word, i) => (
-    <NoteCard key={i} index={i + 1} keyword={word} definition={text} />
-  ));
 
   const titleInputHandler = (e) => {
     setEnteredTitle(e.target.value);
@@ -25,6 +24,52 @@ const NoteForm = () => {
   const summaryInputHandler = (e) => {
     setEnteredSummary(e.target.value);
   };
+
+  const editKeywordHandler = (i, definition) => {
+    const words = [...highlights];
+    const oldWord = words[i];
+
+    words[i] = {
+      word: oldWord.word,
+      score: oldWord.score,
+      definition,
+    };
+
+    setHighlights(words);
+  };
+
+  const deleteKeywordHandler = (i) => {
+    const words = [...highlights];
+    words.splice(i, 1);
+    setHighlights(words);
+  };
+
+  const cancelFormHandler = () => {
+    navigate("/summarize");
+    dispatch(noteActions.saveNote({ summary: "", keywords: [] }));
+  };
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+
+    console.log(highlights);
+    const note = {
+      title: enteredTitle,
+      summary: enteredSummary,
+      keywords: highlights,
+    };
+
+    dispatch(noteActions.addNote(note));
+    navigate("/");
+  };
+
+  useEffect(() => {
+    dispatch(noteActions.enterNote());
+
+    return () => {
+      dispatch(noteActions.exitNote());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     const currentRef = textAreaRef.current;
@@ -37,12 +82,24 @@ const NoteForm = () => {
     }
   }, [enteredSummary]);
 
+  const renderedCards = highlights.map((word, i) => (
+    <NoteCard
+      key={i}
+      index={i}
+      keyword={word.word}
+      onDelete={deleteKeywordHandler}
+      onEdit={editKeywordHandler}
+    />
+  ));
+
   return (
-    <form className={styles.noteForm}>
+    <form className={styles.noteForm} onSubmit={submitFormHandler}>
       <div className={styles.heading}>
         <h1>Create a new study set</h1>
         <div className={styles.buttons}>
-          <Button className="btn--secondary">Cancel</Button>
+          <Button className="btn--secondary" onClick={cancelFormHandler}>
+            Cancel
+          </Button>
           <Button className="btn--primary" type="submit">
             Create set
           </Button>

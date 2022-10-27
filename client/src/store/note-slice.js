@@ -4,6 +4,8 @@ const noteSlice = createSlice({
   name: "note",
   initialState: {
     isNoteMode: false,
+    newNote: {},
+    notes: [],
   },
   reducers: {
     enterNote(state) {
@@ -11,6 +13,24 @@ const noteSlice = createSlice({
     },
     exitNote(state) {
       state.isNoteMode = false;
+    },
+    saveNote(state, action) {
+      const words = [...action.payload.keywords];
+      const newKeywords = words.map((word) => ({
+        word: word.text,
+        definition: "",
+        score: word.score,
+      }));
+
+      const note = {
+        summary: action.payload.summary,
+        keywords: newKeywords,
+      };
+
+      state.newNote = note;
+    },
+    addNote(state, action) {
+      state.notes.push(action.payload);
     },
   },
 });
