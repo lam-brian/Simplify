@@ -4,9 +4,21 @@ import SummaryForm from "./SummaryForm";
 import SummarizedContent from "./SummarizedContent";
 import styles from "./Summary.module.css";
 
+const DUMMY_SUMMARY = "hello word, my name is brian.";
+const DUMMY_KEYWORDS = [
+  {
+    text: "hello",
+    score: "1",
+  },
+  {
+    text: "test",
+    score: "2",
+  },
+];
+
 const Summary = () => {
-  const [summary, setSummary] = useState("");
-  const [keywords, setKeywords] = useState([]);
+  const [summary, setSummary] = useState(DUMMY_SUMMARY);
+  const [keywords, setKeywords] = useState(DUMMY_KEYWORDS);
 
   const retrieveSummaryHandler = (text) => {
     setSummary(text);

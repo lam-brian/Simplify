@@ -30,10 +30,17 @@
   position: relative;
 }
 
-.content label {
+.content input {
   background-color: var(--primary-white);
+  font-family: inherit;
+  border: none;
+  font-size: 1.6rem;
   flex: 10 25%;
   font-weight: 600;
+}
+
+.content input::placeholder {
+  font-weight: 400;
 }
 
 .content textarea {
@@ -46,7 +53,8 @@
   border-left: 2px solid #2a498881;
 }
 
-.inactive textarea:focus {
+.inactive textarea:focus,
+.inactive input:focus {
   outline: none;
 }
 

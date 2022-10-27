@@ -19,7 +19,10 @@ function App() {
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="/summarize" element={<Summarize />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/new-note" element={<NewNote />} />
+        <Route path="/note/:noteId" element={<ActiveNote />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </>
     );
   } else {
@@ -27,8 +30,7 @@ function App() {
       <>
         <Route path="/" element={<Navigate replace to="/summarize" />} />
         <Route path="/summarize" element={<Summarize />} />
-        <Route path="/new-note" element={<NewNote />} />
-        <Route path="/note/:noteId" element={<ActiveNote />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </>
     );
   }

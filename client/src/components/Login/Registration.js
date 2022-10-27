@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginActions } from "../../store/login-slice";
 
 import Button from "../FormElements/Button/Button";
 import { ReactComponent as CloseIcon } from "../../images/icons/close-circle.svg";
-import { logos } from "../../images";
 import styles from "./Registration.module.css";
 
 const Registration = ({ setOpenModal }) => {
   const [index, setindex] = useState(0);
   const dispatch = useDispatch();
+
   const loginFormHandler = async (event) => {
     event.preventDefault();
     const email = document.getElementById("email-login").value.trim();
