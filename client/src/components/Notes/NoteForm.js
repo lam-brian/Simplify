@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -51,6 +51,13 @@ const NoteForm = ({ summary, keywords }) => {
     setHighlights(words);
   };
 
+  const addNewCardHandler = () => {
+    const words = [...highlights];
+    const newWord = { word: "", definition: "", score: null };
+    words.push(newWord);
+    setHighlights(words);
+  };
+
   const deleteKeywordHandler = (i) => {
     const words = [...highlights];
     words.splice(i, 1);
@@ -81,6 +88,8 @@ const NoteForm = ({ summary, keywords }) => {
       summary: enteredSummary,
       keywords: highlights,
     };
+
+    console.log(note);
 
     dispatch(noteActions.addNote(note));
     navigate("/");
@@ -158,6 +167,7 @@ const NoteForm = ({ summary, keywords }) => {
       <Button
         className="btn--light"
         style={{ fontFamily: "Lora, serif", width: "100%" }}
+        onClick={addNewCardHandler}
       >
         <img src={icons.plus} alt="" />
         Add card
