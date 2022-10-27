@@ -5,8 +5,6 @@ const HomePage = () => {
   const notes = useSelector((state) => state.note.notes);
   const user = useSelector((state) => state.login.user);
 
-  console.log(notes);
-
   return <Home notes={notes} user={user} />;
 };
 

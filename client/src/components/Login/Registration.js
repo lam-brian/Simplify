@@ -16,11 +16,14 @@ const Registration = ({ setOpenModal }) => {
     const password = document.getElementById("password-login").value.trim();
 
     if (email && password) {
-      const response = await fetch("http://localhost:3001/api/users/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -39,11 +42,14 @@ const Registration = ({ setOpenModal }) => {
     const email = document.getElementById("email-signup").value.trim();
     const password = document.getElementById("password-signup").value.trim();
     if (name && email && password) {
-      const response = await fetch("http://localhost:3001/api/users", {
-        method: "POST",
-        body: JSON.stringify({ name, email, password }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, email, password }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         const { id, name, email } = data;

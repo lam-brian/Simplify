@@ -16,11 +16,14 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
     if (!url && !text) return;
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/api/notes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, text }),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, text }),
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Unable to summarize, please try again!");

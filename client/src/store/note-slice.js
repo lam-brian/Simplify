@@ -71,11 +71,14 @@ export const noteActions = noteSlice.actions;
 
 export const saveNoteToDB = (note) => {
   return async (dispatch) => {
-    const response = await fetch("http://localhost:3001/api/notes/newNote", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(note),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/api/notes/newNote`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(note),
+      }
+    );
 
     const data = await response.json();
 
@@ -85,7 +88,9 @@ export const saveNoteToDB = (note) => {
 
 export const fetchNotes = (uid) => {
   return async (dispatch) => {
-    const response = await fetch(`http://localhost:3001/notes/${uid}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/notes/${uid}`
+    );
 
     const data = await response.json();
 

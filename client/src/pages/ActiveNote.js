@@ -8,8 +8,6 @@ const ActiveNote = () => {
 
   const notes = useSelector((state) => state.note.notes);
 
-  console.log(notes);
-
   const currentNote = notes.find((note) => note.id === +noteId);
 
   return (
