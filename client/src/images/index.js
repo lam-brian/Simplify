@@ -3,12 +3,13 @@ import logo from "./logo.svg";
 import logoLogged from "./logo-logged.svg";
 
 //illustrations
-import dictionary from "./illustration-dictionary.svg";
 import books from "./illustration-books.svg";
+import laptop from "./illustration-laptop.svg";
 
 // icons
 import arrowDown from "./icons/arrow-down.svg";
 import arrowUp from "./icons/arrow-up.svg";
+import calendar from "./icons/calendar.svg";
 import closeCircle from "./icons/close-circle.svg";
 import documentText from "./icons/document-text.svg";
 import edit from "./icons/edit.svg";
@@ -24,10 +25,11 @@ import star from "./icons/star.svg";
 import user from "./icons/user.svg";
 
 export const logos = { logo, logoLogged };
-export const illustrations = { dictionary, books };
+export const illustrations = { books, laptop };
 export const icons = {
   arrowDown,
   arrowUp,
+  calendar,
   closeCircle,
   documentText,
   edit,

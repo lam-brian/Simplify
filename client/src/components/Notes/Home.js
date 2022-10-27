@@ -1,33 +1,75 @@
-import styles from "./Home.module.css"
-import Typing from "../../images/typing.png"
-import Notes from "./Notes"
-import Helmet from "react-helmet"
+import { useState, useEffect, useRef } from "react";
+import Helmet from "react-helmet";
 
-const Home = () => {
+import { ReactComponent as ArrowDownIcon } from "../../images/icons/arrowDownComponent.svg";
+import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrowUpComponent.svg";
+import Note from "./Note";
+import Button from "../FormElements/Button/Button";
+import { illustrations } from "../../images";
+import styles from "./Home.module.css";
+
+const Home = ({ notes, user }) => {
+  const [showSortOptions, setShowSortOptions] = useState(false);
+  const sortRef = useRef(null);
+
+  const toggleShowSortOptions = () => {
+    setShowSortOptions((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    const currentSortRef = sortRef.current;
+
+    function handleClickOutside(event) {
+      if (currentSortRef && !currentSortRef.contains(event.target)) {
+        setShowSortOptions(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSortOptions]);
+
+  const renderedNotes = notes.map((note, i) => (
+    <Note
+      key={i}
+      title={note.title}
+      termCount={note.keywords.length}
+      date={note.date}
+    />
+  ));
+
+  console.log(notes);
 
   return (
     <>
       <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <div className={styles.frame}>
-            <div className={styles.welcome}>Welcome back, Brian</div>
-            <div className={styles.start}>Let's start studying</div>
-          </div>
-          <img className={styles.typing} src={Typing} />
+      <div className={styles.banner}>
+        <div className={styles.heading}>
+          <h1>Welcome back, {user}</h1>
+          <p>Let's start studying</p>
+        </div>
+        <div className={styles.illustration}>
+          <img src={illustrations.laptop} alt="" />
         </div>
       </div>
-      <div className={styles.header}>Your notes</div>
+      <div className={styles.header}>
+        <h2>Your Notes</h2>
+        <button className={styles["btn--sort"]} onClick={toggleShowSortOptions}>
+          Sort {showSortOptions ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        </button>
+        {showSortOptions && (
+          <div className={styles.sortMenu} ref={sortRef}>
+            <Button>Alphabetical</Button>
+            <Button>Date Created</Button>
+          </div>
+        )}
+      </div>
       <div className={styles.cardFrame}>
-        <Notes />
-        <Notes />
-        <Notes />
-        <Notes />
-        <Notes />
-        <Notes />
+        {notes.length > 0 ? renderedNotes : <p>No notes found!</p>}
       </div>
     </>
   );
-}
+};
 
 export default Home;

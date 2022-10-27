@@ -1,92 +1,101 @@
-.body {
-  background-color: #f4faff;
-  width: 100%;
-  height: 100%;
-  margin: none;
-}
-
-.card {
-  position: relative;
-  width: 90%;
-  height: 250px;
-  background: #ffffff;
+.banner {
+  background-color: var(--primary-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
   border-radius: 16px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin-left: 5%;
-  margin-right: 5%;
-  z-index: -1;
+  padding: 1.8rem 6.4rem;
+  margin-bottom: 4.8rem;
 }
 
-.welcome {
-  font-family: "Lora";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 150%;
-  text-align: center;
-
-  color: #2a4988;
+.heading {
+  flex: 1 0 20%;
 }
 
-.start {
-  width: 184px;
-  height: 30px;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 150%;
-  text-align: center;
-  color: #808081;
+.heading h1 {
+  color: var(--primary-blue-dark);
+  margin-bottom: 2.4rem;
+  font-size: 3.6rem;
+  line-height: 1.25;
 }
 
-.frame {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
-  position: relative;
-  width: 317px;
-  height: 99px;
-  left: 36px;
-  top: 60px;
+.heading p {
+  color: var(--primary-grey-dark);
+  font-size: 2.4rem;
 }
 
-.container {
-  align-items: center;
+.illustration {
+  flex: 1 0 30%;
 }
 
-.typing {
-  position: absolute;
-  left: 50%;
-  top: 1px;
-}
-
-.cardFrame {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin-left: 6%;
-  margin-right: 6%;
+.illustration img {
+  width: 100%;
 }
 
 .header {
-  margin-left: 5%;
-  margin-top: 3%;
-  margin-bottom: none;
-  width: 103px;
-  height: 30px;
-  font-family: "Lora";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 150%;
-  text-align: center;
-  color: #252428;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 2.4rem;
+}
+
+.header h2 {
+  font-size: 2rem;
+}
+
+.header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-black);
+  font-family: var(--font-fam-lora);
+  font-size: 1.8rem;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.header button svg {
+  stroke: var(--primary-black);
+}
+
+.btn--sort {
+  transition: all 0.3s ease-out;
+}
+
+.btn--sort:hover {
+  opacity: 0.7;
+}
+
+.sortMenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: var(--primary-white);
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  right: 0;
+  top: 100%;
+  box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
+}
+
+.sortMenu button {
+  display: flex;
+  gap: 1.2rem;
+  color: var(--primary-grey-light);
+  font-family: var(--font-fam-lora);
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+}
+
+.sortMenu button:hover {
+  color: var(--primary-blue-dark);
+}
+
+.cardFrame {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10rem;
 }

@@ -5,7 +5,14 @@ const noteSlice = createSlice({
   initialState: {
     isNoteMode: false,
     newNote: {},
-    notes: [],
+    notes: [
+      {
+        title: "test",
+        summary: "hello worlds",
+        keywords: [{ word: "text", score: "23", definition: "testing23" }],
+        date: "2022-10-27T05:21:38.841Z",
+      },
+    ],
   },
   reducers: {
     enterNote(state) {
@@ -30,7 +37,15 @@ const noteSlice = createSlice({
       state.newNote = note;
     },
     addNote(state, action) {
-      state.notes.push(action.payload);
+      const { title, summary, keywords } = action.payload;
+
+      const note = {
+        title,
+        summary,
+        keywords,
+        date: new Date().toISOString(),
+      };
+      state.notes.push(note);
     },
   },
 });
