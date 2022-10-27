@@ -11,7 +11,11 @@ router.get("/:uid", async (req, res) => {
     const { id, name, notes } = user;
     res.json({ id, name, notes });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      message: "Couldn't get notes.",
+    });
   }
 });
 
