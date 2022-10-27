@@ -18,11 +18,15 @@ Note.init(
     summary: {
       type: DataTypes.STRING,
     },
+    highlight: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id',
+        model: "user",
+        key: "id",
       },
     },
   },
@@ -31,7 +35,7 @@ Note.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'note',
+    modelName: "note",
   }
 );
 
