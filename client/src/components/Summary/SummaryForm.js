@@ -23,7 +23,7 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
       });
 
       if (!res.ok) {
-        throw new Error("Unable to summarize");
+        throw new Error("Unable to summarize, please try again!");
       }
 
       const { summary, keywords } = await res.json();

@@ -12,7 +12,7 @@ const Settings = ({ username, email }) => {
       <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
       <div className={styles.container}>
         Account Setting
-        <div className={styles.avatar}>B</div>
+        <div className={styles.avatar}>{username[0].toUpperCase()}</div>
         <div className={styles.settings}>
           <div className={styles.profile}>
             <h3>Profile Details</h3>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import Registration from "../Login/Registration";
 import Button from "../FormElements/Button/Button";
@@ -9,17 +9,18 @@ import { logos } from "../../images";
 import styles from "./Header.module.css";
 
 const Header = () => {
-   const [modalOpen, setModalOpen] = useState(false);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const user = useSelector((state) => state.login.user);
+  const [modalOpen, setModalOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (e.path[0].tagName !== 'BUTTON') {
-          setSettingOpen(false);
+      if (e.path[0].tagName !== "BUTTON") {
+        setSettingOpen(false);
       }
     };
     document.body.addEventListener("click", closeDropdown);
-    return () => document.body.removeEventListener('click', closeDropdown)
+    return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
 
   let actions = (
@@ -57,7 +58,7 @@ const Header = () => {
             }}
             className="btn--avatar"
           >
-            B
+            {user.username[0].toUpperCase()}
           </Button>
           {settingOpen && <Dropdown setOpenModal={setSettingOpen} />}
         </div>

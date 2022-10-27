@@ -30,15 +30,31 @@ const noteSlice = createSlice({
       state.newNote = note;
     },
     addNote(state, action) {
-      const { title, summary, keywords } = action.payload;
+      const { title, summary, highlights: keywords, id, date } = action.payload;
 
       const note = {
         title,
         summary,
         keywords,
-        date: new Date().toISOString(),
+        id,
+        date,
       };
       state.notes.push(note);
+    },
+    retrieveNotes(state, action) {
+      if (state.notes.length === 0) {
+        const fetchedNotes = action.payload;
+
+        const newNotes = fetchedNotes.map((note) => ({
+          title: note.title,
+          summary: note.summary,
+          keywords: note.highlights,
+          id: note.id,
+          date: note.date,
+        }));
+
+        state.notes = newNotes;
+      }
     },
     updateNote(state, action) {
       const note = state.notes.find((note) => note.id === action.payload.id);
@@ -54,20 +70,26 @@ const noteSlice = createSlice({
 export const noteActions = noteSlice.actions;
 
 export const saveNoteToDB = (note) => {
-  return (dispatch) => {
-    const sendRequest = async () => {
-      const response = await fetch("http://localhost:3001/api/notes/newNote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(note),
-      });
+  return async (dispatch) => {
+    const response = await fetch("http://localhost:3001/api/notes/newNote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(note),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      console.log(data);
-    };
+    dispatch(noteActions.addNote(data));
+  };
+};
 
-    sendRequest();
+export const fetchNotes = (uid) => {
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:3001/notes/${uid}`);
+
+    const data = await response.json();
+
+    dispatch(noteActions.retrieveNotes(data.notes));
   };
 };
 

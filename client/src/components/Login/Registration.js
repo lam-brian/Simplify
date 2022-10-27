@@ -25,7 +25,6 @@ const Registration = ({ setOpenModal }) => {
       if (response.ok) {
         const data = await response.json();
         const { id, name, email } = data.user;
-        console.log(id, name, email);
         dispatch(loginActions.login({ id, username: name, email }));
         setOpenModal(false);
       } else {
@@ -40,14 +39,14 @@ const Registration = ({ setOpenModal }) => {
     const email = document.getElementById("email-signup").value.trim();
     const password = document.getElementById("password-signup").value.trim();
     if (name && email && password) {
-      const response = await fetch("http://localhost:3001/api/users/", {
+      const response = await fetch("http://localhost:3001/api/users", {
         method: "POST",
         body: JSON.stringify({ name, email, password }),
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
         const data = await response.json();
-        const { id, name, email } = data.user;
+        const { id, name, email } = data;
         dispatch(loginActions.login({ id, username: name, email }));
         setOpenModal(false);
       } else {

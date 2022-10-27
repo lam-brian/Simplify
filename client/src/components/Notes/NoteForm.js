@@ -87,19 +87,11 @@ const NoteForm = ({ summary, keywords }) => {
       title: enteredTitle,
       summary: enteredSummary,
       highlights,
+      date: new Date().toISOString(),
     };
 
-    const response = await fetch("http://localhost:3001/api/notes/newNote", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(note),
-    });
-
-    const data = await response.json();
-
-    console.log(data);
-    // dispatch(saveNoteToDB(note));
-    // navigate("/");
+    dispatch(saveNoteToDB(note));
+    navigate("/");
   };
 
   useEffect(() => {

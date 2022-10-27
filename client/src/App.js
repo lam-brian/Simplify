@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchNotes } from "./store/note-slice";
 import Summarize from "./pages/Summarize";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
@@ -9,9 +10,17 @@ import Setting from "./pages/Setting";
 import ActiveNote from "./pages/ActiveNote";
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.login.user);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   let routes;
+
+  useEffect(() => {
+    if (user.id) {
+      dispatch(fetchNotes(user.id));
+    }
+  }, [dispatch, user.id]);
 
   if (isLoggedIn) {
     routes = (

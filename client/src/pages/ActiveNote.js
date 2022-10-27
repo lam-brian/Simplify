@@ -8,7 +8,9 @@ const ActiveNote = () => {
 
   const notes = useSelector((state) => state.note.notes);
 
-  const currentNote = notes.find((note) => note.id === noteId);
+  console.log(notes);
+
+  const currentNote = notes.find((note) => note.id === +noteId);
 
   return (
     <SelectedNote
