@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 import Button from "../FormElements/Button/Button";
-import { ReactComponent as CloseIcon } from "../../images/icons/close-circle.svg";
+import { ReactComponent as CloseIcon } from "../../images/icons/closeCircleComponent.svg";
 import { ReactComponent as StarIcon } from "../../images/icons/star.svg";
 import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
 import styles from "./NoteCard.module.css";
@@ -33,10 +33,10 @@ const NoteCard = ({
     onEditDefinition(index, e.target.value);
   };
 
-  const cancelEditingHandler = () => {
-    setIsEditing(false);
+  useEffect(() => {
+    setHighlight(keyword);
     setWordDefinition(definition);
-  };
+  }, [highlight, definition, keyword]);
 
   useEffect(() => {
     const currentKeywordRef = keywordRef.current;
@@ -98,23 +98,12 @@ const NoteCard = ({
         >
           <EditIcon />
         </Button>
-        <Button>
+        <Button onClick={onDelete.bind(null, index)}>
           <CloseIcon />
         </Button>
       </div>
     );
   }
-
-  // if (isEditing) {
-  //   buttons = (
-  //     <div className={styles.actions}>
-  //       <Button className="btn--secondary" onClick={cancelEditingHandler}>
-  //         Cancel
-  //       </Button>
-  //       <Button className="btn--primary">Save</Button>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className={styles.noteCard}>

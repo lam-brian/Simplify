@@ -9,9 +9,22 @@ const noteSlice = createSlice({
       {
         title: "test",
         summary: "hello worlds",
-        keywords: [{ word: "text", score: "23", definition: "testing23" }],
+        keywords: [
+          { word: "text", score: "23", definition: "testing23" },
+          { word: "helo", score: "1", definition: "testing23" },
+        ],
         date: "2022-10-27T05:21:38.841Z",
         id: "1",
+      },
+      {
+        title: "1232132",
+        summary: "hello worlds",
+        keywords: [
+          { word: "text", score: "23", definition: "testing23" },
+          { word: "helo", score: "1", definition: "testing23" },
+        ],
+        date: "2022-10-27T05:21:38.841Z",
+        id: "2",
       },
     ],
   },
@@ -47,6 +60,14 @@ const noteSlice = createSlice({
         date: new Date().toISOString(),
       };
       state.notes.push(note);
+    },
+    updateNote(state, action) {
+      const note = state.notes.find((note) => note.id === action.payload.id);
+
+      note.keywords = action.payload.keywords;
+    },
+    deleteNote(state, action) {
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
   },
 });

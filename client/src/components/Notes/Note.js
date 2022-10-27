@@ -10,15 +10,23 @@ const Note = ({ title, termCount, date, id }) => {
     navigate(`/notes/${id}`);
   };
 
+  const dateObj = new Date(date);
+
+  const dateString = dateObj.toLocaleDateString("default", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+
   return (
     <div className={styles.card}>
-      <h3>{"title"}</h3>
+      <h3>{title}</h3>
       <Button className="btn--secondary" onClick={openNoteHandler}>
-        {22} terms
+        {termCount} terms
       </Button>
       <p>
         <img src={icons.calendar} alt="" />
-        October 19, 2022
+        {dateString}
       </p>
     </div>
   );

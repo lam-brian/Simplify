@@ -60,10 +60,8 @@ const NoteForm = ({ summary, keywords }) => {
 
   const deleteKeywordHandler = (i) => {
     const words = [...highlights];
-    console.log(i, "hello");
     words.splice(i, 1);
-    console.log(words);
-    // setHighlights(words);
+    setHighlights(words);
   };
 
   const cancelFormHandler = () => {
@@ -118,7 +116,7 @@ const NoteForm = ({ summary, keywords }) => {
 
   const renderedCards = highlights.map((word, i) => (
     <NoteCard
-      key={i}
+      key={word.score}
       index={i}
       keyword={word.word}
       onDelete={deleteKeywordHandler}

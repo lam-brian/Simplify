@@ -99,3 +99,31 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 10rem;
 }
+
+@media (max-width: 1675px) {
+  .cardFrame {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1440px) {
+  .heading h1 {
+    font-size: 3rem;
+  }
+
+  .heading p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1157px) {
+  .cardFrame {
+    gap: 4.8rem;
+  }
+}
+
+@media (max-width: 997px) {
+  .cardFrame {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

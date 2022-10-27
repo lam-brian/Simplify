@@ -123,3 +123,19 @@
   justify-content: space-between;
   gap: 4.5rem;
 }
+
+.actions {
+  position: fixed;
+  bottom: 3%;
+  right: 3%;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.actions button {
+  box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
+}
+
+.actions button:hover {
+  opacity: 0.7;
+}

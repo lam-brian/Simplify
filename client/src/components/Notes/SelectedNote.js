@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { noteActions } from "../../store/note-slice";
 import { icons } from "../../images";
@@ -12,11 +13,14 @@ import Button from "../FormElements/Button/Button";
 import styles from "./SelectedNote.module.css";
 
 const SelectedNote = ({ title, summary, keywords, id }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isChanged, setIsChanged] = useState(false);
   const [highlights, setHighlights] = useState(keywords);
   const [showSettings, setShowSettings] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSortOptions, setShowSortOptions] = useState(false);
+  const [newCardIndex, setNewCardIndex] = useState(undefined);
   const settingsRef = useRef(null);
   const sortRef = useRef(null);
 
@@ -39,6 +43,28 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
 
   const toggleShowSortOptions = () => {
     setShowSortOptions((prevState) => !prevState);
+  };
+
+  const cancelChangesHandler = () => {
+    setHighlights(keywords);
+  };
+
+  const saveChangesHandler = () => {
+    if (
+      highlights.some(
+        (word) => word.word.trim() === "" || word.definition.trim() === ""
+      )
+    ) {
+      alert("Please fill in all inputs");
+      return;
+    }
+
+    dispatch(noteActions.updateNote({ id, keywords: highlights }));
+  };
+
+  const deleteStudySetHandler = () => {
+    dispatch(noteActions.deleteNote(id));
+    navigate("/");
   };
 
   const editKeywordHandler = (i, word) => {
@@ -68,11 +94,42 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   };
 
   const deleteKeywordHandler = (i) => {
-    console.log(i);
-    // const words = [...highlights];
-    // words.splice(i, 1);
-    // setHighlights(words);
+    const words = [...highlights];
+    words.splice(i, 1);
+    setHighlights(words);
   };
+
+  const addNewCardHandler = () => {
+    const words = [...highlights];
+    const newWord = {
+      word: "",
+      definition: "",
+      score: Math.random().toString(),
+    };
+    words.push(newWord);
+    setHighlights(words);
+    setNewCardIndex(words.length);
+  };
+
+  useEffect(() => {
+    const originalKeywords = keywords;
+
+    if (originalKeywords.length !== highlights.length) {
+      return setIsChanged(true);
+    }
+
+    for (let i = 0; i < originalKeywords.length; i++) {
+      const originalKeys = originalKeywords[i];
+      const newKeys = highlights[i];
+
+      if (
+        originalKeys.word !== newKeys.word ||
+        originalKeys.definition !== newKeys.definition
+      ) {
+        return setIsChanged(true);
+      } else setIsChanged(false);
+    }
+  }, [keywords, highlights]);
 
   useEffect(() => {
     const currentSettingsRef = settingsRef.current;
@@ -110,19 +167,21 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
     };
   }, [dispatch]);
 
-  const renderedCards = keywords.map((word, i) => (
-    <NoteCard
-      active={true}
-      key={i}
-      index={i}
-      keyword={word.word}
-      definition={word.definition}
-      editing={false}
-      onDelete={deleteKeywordHandler}
-      onEditKeyword={editKeywordHandler}
-      onEditDefinition={editDefinitionHandler}
-    />
-  ));
+  const renderedCards = highlights.map((word, i) => {
+    return (
+      <NoteCard
+        active={true}
+        key={word.score}
+        index={i}
+        keyword={word.word}
+        definition={word.definition}
+        editing={i === newCardIndex - 1}
+        onDelete={deleteKeywordHandler}
+        onEditKeyword={editKeywordHandler}
+        onEditDefinition={editDefinitionHandler}
+      />
+    );
+  });
 
   return (
     <>
@@ -138,6 +197,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
             <Button
               className="btn--primary"
               style={{ backgroundColor: "#DD4D42" }}
+              onClick={deleteStudySetHandler}
             >
               Delete study set
             </Button>
@@ -149,6 +209,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
           retrieve the data again.
         </p>
       </Modal>
+
       <div className={styles.heading}>
         <h1>{title}</h1>
         <Button onClick={showSettingsHandler}>
@@ -196,10 +257,21 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
       <Button
         className="btn--light"
         style={{ fontFamily: "Lora, serif", width: "100%" }}
+        onClick={addNewCardHandler}
       >
         <img src={icons.plus} alt="" />
         Add card
       </Button>
+      {isChanged && (
+        <div className={styles.actions}>
+          <Button className="btn--secondary" onClick={cancelChangesHandler}>
+            Cancel
+          </Button>
+          <Button className="btn--primary" onClick={saveChangesHandler}>
+            Save
+          </Button>
+        </div>
+      )}
     </>
   );
 };

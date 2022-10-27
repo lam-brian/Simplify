@@ -40,8 +40,6 @@ const Home = ({ notes, user }) => {
     />
   ));
 
-  console.log(notes);
-
   return (
     <>
       <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />

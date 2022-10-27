@@ -22,8 +22,6 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
         body: JSON.stringify({ url, text }),
       });
 
-      console.log(res);
-
       if (!res.ok) {
         throw new Error("Unable to summarize");
       }
@@ -34,7 +32,7 @@ const SummaryForm = ({ onRetrieveSummary, onRetrieveKeywords }) => {
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
+      alert(err);
     }
   };
 
