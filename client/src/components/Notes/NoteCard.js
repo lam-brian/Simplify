@@ -13,16 +13,23 @@ const NoteCard = ({
   editing,
   active,
   onDelete,
-  onEdit,
+  onEditKeyword,
+  onEditDefinition,
 }) => {
+  const [highlight, setHighlight] = useState(keyword || "");
   const [wordDefinition, setWordDefinition] = useState(definition || "");
   const [isEditing, setIsEditing] = useState(editing);
   const textAreaRef = useRef(null);
   const cardNumber = String(index + 1).padStart(2, "0") + ".";
 
+  const highlightChangeHandler = (e) => {
+    setHighlight(e.target.value);
+    onEditKeyword(index, e.target.value);
+  };
+
   const definitionChangeHandler = (e) => {
     setWordDefinition(e.target.value);
-    onEdit(index, e.target.value);
+    onEditDefinition(index, e.target.value);
   };
 
   const cancelEditingHandler = () => {
@@ -86,10 +93,15 @@ const NoteCard = ({
           isEditing ? styles.active : styles.inactive
         }`}
       >
-        <label htmlFor={keyword}>{keyword}</label>
-        <textarea
+        <input
           type="text"
-          id={keyword}
+          value={highlight}
+          onChange={highlightChangeHandler}
+          readOnly={isEditing === undefined ? false : !isEditing}
+          placeholder="Enter a keyword"
+        />
+
+        <textarea
           value={wordDefinition}
           onChange={definitionChangeHandler}
           ref={textAreaRef}

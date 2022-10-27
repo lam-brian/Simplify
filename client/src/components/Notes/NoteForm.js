@@ -25,7 +25,20 @@ const NoteForm = ({ summary, keywords }) => {
     setEnteredSummary(e.target.value);
   };
 
-  const editKeywordHandler = (i, definition) => {
+  const editKeywordHandler = (i, word) => {
+    const words = [...highlights];
+    const oldWord = words[i];
+
+    words[i] = {
+      word,
+      score: oldWord.score,
+      definition: oldWord.definition,
+    };
+
+    setHighlights(words);
+  };
+
+  const editDefinitionHandler = (i, definition) => {
     const words = [...highlights];
     const oldWord = words[i];
 
@@ -52,7 +65,17 @@ const NoteForm = ({ summary, keywords }) => {
   const submitFormHandler = (e) => {
     e.preventDefault();
 
-    console.log(highlights);
+    let keywordsIsValid = true;
+
+    if (highlights.some((word) => word.word === "" || word.definition === "")) {
+      keywordsIsValid = false;
+    }
+
+    if (!enteredTitle || !summary || !keywordsIsValid) {
+      alert("Please fill in all inputs");
+      return;
+    }
+
     const note = {
       title: enteredTitle,
       summary: enteredSummary,
@@ -88,7 +111,8 @@ const NoteForm = ({ summary, keywords }) => {
       index={i}
       keyword={word.word}
       onDelete={deleteKeywordHandler}
-      onEdit={editKeywordHandler}
+      onEditKeyword={editKeywordHandler}
+      onEditDefinition={editDefinitionHandler}
     />
   ));
 
