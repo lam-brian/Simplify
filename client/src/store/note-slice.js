@@ -11,6 +11,7 @@ const noteSlice = createSlice({
         summary: "hello worlds",
         keywords: [{ word: "text", score: "23", definition: "testing23" }],
         date: "2022-10-27T05:21:38.841Z",
+        id: "1",
       },
     ],
   },

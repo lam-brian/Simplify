@@ -28,33 +28,39 @@
   background-color: var(--primary-white);
   padding: 2.4rem 1.2rem;
   position: relative;
+  gap: 2.4rem;
 }
 
-.content input {
+.keyword {
   background-color: var(--primary-white);
   font-family: inherit;
   border: none;
   font-size: 1.6rem;
-  flex: 10 25%;
+  flex: 1 0 10%;
   font-weight: 600;
+  padding: 1.2rem;
+  resize: none;
+  border: none;
+  overflow: hidden;
 }
 
-.content input::placeholder {
+.keyword::placeholder {
   font-weight: 400;
 }
 
-.content textarea {
+.definition {
   font: inherit;
   padding: 1.2rem;
   padding-left: 2.4rem;
-  flex: 1 0 75%;
+  flex: 1 0 60%;
   resize: none;
   border: none;
   border-left: 2px solid #2a498881;
+  overflow: hidden;
 }
 
-.inactive textarea:focus,
-.inactive input:focus {
+.inactive .definition:focus,
+.inactive .keyword:focus {
   outline: none;
 }
 
@@ -63,7 +69,8 @@
   gap: 2.4rem;
 }
 
-.active textarea {
+.active .definition,
+.active .keyword {
   border: 2px solid var(--primary-blue-dark);
   outline: none;
   border-radius: 6px;

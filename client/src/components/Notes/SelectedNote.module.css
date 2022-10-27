@@ -45,6 +45,8 @@
 
 .summary h2 {
   margin-bottom: 1.2rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .summary p {
@@ -60,6 +62,8 @@
 
 .highlights legend {
   font-family: var(--font-fam-lora);
+  color: var(--primary-black);
+  font-weight: 600;
   font-size: 2rem;
   pointer-events: none;
 }

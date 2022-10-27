@@ -1,31 +1,21 @@
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SelectedNote from "../components/Notes/SelectedNote";
 
-const DUMMY_KEYWORDS = [
-  {
-    word: "apple",
-    definition:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt nemo eos vero culpa nihil impedit itaque perferendis modi autem ducimus incidunt id nisi dolores laudantium quia, iusto aliquid dignissimos omnis.",
-  },
-  {
-    word: "banana",
-    definition:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt nemo eos vero culpa nihil impedit itaque perferendis modi autem ducimus incidunt id nisi dolores laudantium quia, iusto aliquid dignissimos omnis.",
-  },
-  {
-    word: "highlight",
-    definition:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt nemo eos vero culpa nihil impedit itaque perferendis modi autem ducimus incidunt id nisi dolores laudantium quia, iusto aliquid dignissimos omnis.",
-  },
-];
-
 const ActiveNote = () => {
+  const params = useParams();
+  const { noteId } = params;
+
+  const notes = useSelector((state) => state.note.notes);
+
+  const currentNote = notes.find((note) => note.id === noteId);
+
   return (
     <SelectedNote
-      title="Pschology 101 Cards"
-      summary={
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt nemo eos vero culpa nihil impedit itaque perferendis modi autem ducimus incidunt id nisi dolores laudantium quia, iusto aliquid dignissimos omnis."
-      }
-      keywords={DUMMY_KEYWORDS}
+      title={currentNote.title}
+      summary={currentNote.summary}
+      keywords={currentNote.keywords}
+      id={currentNote.id}
     />
   );
 };

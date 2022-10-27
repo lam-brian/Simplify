@@ -33,6 +33,7 @@ const Home = ({ notes, user }) => {
   const renderedNotes = notes.map((note, i) => (
     <Note
       key={i}
+      id={note.id}
       title={note.title}
       termCount={note.keywords.length}
       date={note.date}

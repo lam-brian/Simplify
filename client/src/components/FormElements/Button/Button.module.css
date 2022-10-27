@@ -63,3 +63,7 @@
 .btn:hover svg {
   stroke: var(--primary-blue-dark);
 }
+
+.btn.active svg {
+  stroke: var(--primary-blue-dark);
+}

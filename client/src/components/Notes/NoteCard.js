@@ -19,7 +19,8 @@ const NoteCard = ({
   const [highlight, setHighlight] = useState(keyword || "");
   const [wordDefinition, setWordDefinition] = useState(definition || "");
   const [isEditing, setIsEditing] = useState(editing);
-  const textAreaRef = useRef(null);
+  const definitionRef = useRef(null);
+  const keywordRef = useRef(null);
   const cardNumber = String(index + 1).padStart(2, "0") + ".";
 
   const highlightChangeHandler = (e) => {
@@ -38,7 +39,38 @@ const NoteCard = ({
   };
 
   useEffect(() => {
-    const currentRef = textAreaRef.current;
+    const currentKeywordRef = keywordRef.current;
+    const currentDefinitionRef = definitionRef.current;
+
+    function handleClickOutside(event) {
+      if (
+        currentDefinitionRef &&
+        !currentDefinitionRef.contains(event.target) &&
+        currentKeywordRef &&
+        !currentKeywordRef.contains(event.target)
+      ) {
+        setIsEditing(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wordDefinition]);
+
+  useEffect(() => {
+    const currentRef = keywordRef.current;
+
+    if (currentRef) {
+      currentRef.style.height = "0px";
+      const scrollHeight = currentRef.scrollHeight;
+
+      currentRef.style.height = scrollHeight + "px";
+    }
+  }, [highlight]);
+
+  useEffect(() => {
+    const currentRef = definitionRef.current;
 
     if (currentRef) {
       currentRef.style.height = "0px";
@@ -60,7 +92,10 @@ const NoteCard = ({
         <Button className="btn--favorite">
           <StarIcon />
         </Button>
-        <Button onClick={() => setIsEditing(true)}>
+        <Button
+          onClick={() => setIsEditing(true)}
+          className={isEditing ? "active" : ""}
+        >
           <EditIcon />
         </Button>
         <Button>
@@ -70,16 +105,16 @@ const NoteCard = ({
     );
   }
 
-  if (isEditing) {
-    buttons = (
-      <div className={styles.actions}>
-        <Button className="btn--secondary" onClick={cancelEditingHandler}>
-          Cancel
-        </Button>
-        <Button className="btn--primary">Save</Button>
-      </div>
-    );
-  }
+  // if (isEditing) {
+  //   buttons = (
+  //     <div className={styles.actions}>
+  //       <Button className="btn--secondary" onClick={cancelEditingHandler}>
+  //         Cancel
+  //       </Button>
+  //       <Button className="btn--primary">Save</Button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={styles.noteCard}>
@@ -93,19 +128,21 @@ const NoteCard = ({
           isEditing ? styles.active : styles.inactive
         }`}
       >
-        <input
-          type="text"
+        <textarea
+          className={styles.keyword}
           value={highlight}
           onChange={highlightChangeHandler}
-          readOnly={isEditing === undefined ? false : !isEditing}
+          ref={keywordRef}
+          readOnly={editing !== undefined ? !isEditing : false}
           placeholder="Enter a keyword"
         />
 
         <textarea
+          className={styles.definition}
           value={wordDefinition}
           onChange={definitionChangeHandler}
-          ref={textAreaRef}
-          readOnly={isEditing === undefined ? false : !isEditing}
+          ref={definitionRef}
+          readOnly={editing !== undefined ? !isEditing : false}
           placeholder="Enter a description"
         />
       </div>

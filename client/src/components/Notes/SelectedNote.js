@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
+import { noteActions } from "../../store/note-slice";
 import { icons } from "../../images";
 import { ReactComponent as ArrowDownIcon } from "../../images/icons/arrowDownComponent.svg";
 import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrowUpComponent.svg";
@@ -9,7 +11,9 @@ import Modal from "../UI/Modal/Modal";
 import Button from "../FormElements/Button/Button";
 import styles from "./SelectedNote.module.css";
 
-const SelectedNote = ({ title, summary, keywords }) => {
+const SelectedNote = ({ title, summary, keywords, id }) => {
+  const dispatch = useDispatch();
+  const [highlights, setHighlights] = useState(keywords);
   const [showSettings, setShowSettings] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSortOptions, setShowSortOptions] = useState(false);
@@ -35,6 +39,39 @@ const SelectedNote = ({ title, summary, keywords }) => {
 
   const toggleShowSortOptions = () => {
     setShowSortOptions((prevState) => !prevState);
+  };
+
+  const editKeywordHandler = (i, word) => {
+    const words = [...highlights];
+    const oldWord = words[i];
+
+    words[i] = {
+      word,
+      score: oldWord.score,
+      definition: oldWord.definition,
+    };
+
+    setHighlights(words);
+  };
+
+  const editDefinitionHandler = (i, definition) => {
+    const words = [...highlights];
+    const oldWord = words[i];
+
+    words[i] = {
+      word: oldWord.word,
+      score: oldWord.score,
+      definition,
+    };
+
+    setHighlights(words);
+  };
+
+  const deleteKeywordHandler = (i) => {
+    console.log(i);
+    // const words = [...highlights];
+    // words.splice(i, 1);
+    // setHighlights(words);
   };
 
   useEffect(() => {
@@ -65,14 +102,25 @@ const SelectedNote = ({ title, summary, keywords }) => {
     };
   }, [showSortOptions]);
 
+  useEffect(() => {
+    dispatch(noteActions.enterNote());
+
+    return () => {
+      dispatch(noteActions.exitNote());
+    };
+  }, [dispatch]);
+
   const renderedCards = keywords.map((word, i) => (
     <NoteCard
       active={true}
       key={i}
-      index={i + 1}
+      index={i}
       keyword={word.word}
       definition={word.definition}
       editing={false}
+      onDelete={deleteKeywordHandler}
+      onEditKeyword={editKeywordHandler}
+      onEditDefinition={editDefinitionHandler}
     />
   ));
 

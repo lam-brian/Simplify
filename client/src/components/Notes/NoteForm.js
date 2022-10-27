@@ -60,8 +60,10 @@ const NoteForm = ({ summary, keywords }) => {
 
   const deleteKeywordHandler = (i) => {
     const words = [...highlights];
+    console.log(i, "hello");
     words.splice(i, 1);
-    setHighlights(words);
+    console.log(words);
+    // setHighlights(words);
   };
 
   const cancelFormHandler = () => {
