@@ -11,7 +11,7 @@ import { noteActions, saveNoteToDB } from "../../store/note-slice";
 const NoteForm = ({ summary, keywords }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.login.userId);
+  const userId = useSelector((state) => state.login.user.id);
 
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredSummary, setEnteredSummary] = useState(summary);
