@@ -45,6 +45,25 @@ router.post("/newNote", async (req, res) => {
   }
 });
 
+router.patch("/:nid", async (req, res) => {
+  try {
+    Note.update(
+      {
+        highlights: req.body.highlights,
+      },
+      {
+        where: {
+          id: req.params.nid,
+        },
+      }
+    );
+
+    res.status(200).json({ message: "Note updated" });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.delete("/:nid", async (req, res) => {
   try {
     const deletedNote = await Note.findOne({

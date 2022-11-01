@@ -128,4 +128,25 @@ export const deleteNote = (nid) => {
   };
 };
 
+export const patchNote = (nid, highlights) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes/${nid}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ highlights }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!response.ok) throw new Error("Error updating note");
+
+      dispatch(noteActions.updateNote({ id: nid, keywords: highlights }));
+    } catch (err) {
+      alert(err);
+    }
+  };
+};
+
 export default noteSlice;
