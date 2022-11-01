@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SelectedNote from "../components/Notes/SelectedNote";
 
@@ -9,6 +9,10 @@ const ActiveNote = () => {
   const notes = useSelector((state) => state.note.notes);
 
   const currentNote = notes.find((note) => note.id === +noteId);
+
+  if (!currentNote) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <SelectedNote
