@@ -23,6 +23,7 @@ const fetchData = async (url, method = "GET", headers = {}, data = null) => {
     return responseData;
   } catch (err) {
     if (err.response) {
+      console.log(err.response);
       throw new Error("something went wrong");
     }
   }

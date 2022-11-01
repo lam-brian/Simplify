@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { Note, User } = require("../../models");
-const withAuth = require("../../utils/auth");
+const { Note } = require("../../models");
 const summarize = require("../../utils/summarize");
 const webscrape = require("../../utils/webscrape");
 
@@ -34,20 +33,16 @@ router.post("/", async (req, res) => {
   res.json(summaryData);
 });
 
-router.post("/newNote",  async (req, res) => {
+router.post("/newNote", async (req, res) => {
   try {
     const newNote = await Note.create({
       ...req.body,
-      user_id: req.session.user_id,
+      user_id: req.body.userId,
     });
-    console.log(newNote);
     res.status(200).json(newNote);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-
 module.exports = router;
-
-

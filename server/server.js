@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const routes = require("./controllers");
-const helpers = require("./utils/helpers");
 const cors = require("cors");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -24,6 +23,7 @@ const sess = {
     db: sequelize,
   }),
 };
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
