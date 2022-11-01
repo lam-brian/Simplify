@@ -45,4 +45,18 @@ router.post("/newNote", async (req, res) => {
   }
 });
 
+router.delete("/:nid", async (req, res) => {
+  try {
+    const deletedNote = await Note.findOne({
+      where: {
+        id: req.params.nid,
+      },
+    });
+    deletedNote.destroy();
+    res.status(200).json({ message: "Note Deleted" });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 module.exports = router;

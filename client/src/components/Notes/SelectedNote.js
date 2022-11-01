@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { noteActions } from "../../store/note-slice";
+import { noteActions, deleteNote } from "../../store/note-slice";
 import { icons } from "../../images";
 import { ReactComponent as ArrowDownIcon } from "../../images/icons/arrowDownComponent.svg";
 import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrowUpComponent.svg";
@@ -63,7 +62,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   };
 
   const deleteStudySetHandler = () => {
-    dispatch(noteActions.deleteNote(id));
+    dispatch(deleteNote(id));
     navigate("/");
   };
 

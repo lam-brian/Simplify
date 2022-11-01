@@ -70,7 +70,7 @@ const NoteForm = ({ summary, keywords }) => {
     dispatch(noteActions.saveNote({ summary: "", keywords: [] }));
   };
 
-  const submitFormHandler = async (e) => {
+  const submitFormHandler = (e) => {
     e.preventDefault();
 
     let keywordsIsValid = true;

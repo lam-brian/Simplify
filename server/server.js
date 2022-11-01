@@ -27,7 +27,7 @@ const sess = {
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
-    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS", "HEAD"],
     credentials: true,
   })
 );

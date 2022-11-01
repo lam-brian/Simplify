@@ -61,7 +61,7 @@ const noteSlice = createSlice({
 
       note.keywords = action.payload.keywords;
     },
-    deleteNote(state, action) {
+    removeNote(state, action) {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
   },
@@ -71,30 +71,60 @@ export const noteActions = noteSlice.actions;
 
 export const saveNoteToDB = (note) => {
   return async (dispatch) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/api/notes/newNote`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(note),
-      }
-    );
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes/newNote`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(note),
+        }
+      );
 
-    const data = await response.json();
+      if (!response.ok) throw new Error("Error saving notes");
 
-    dispatch(noteActions.addNote(data));
+      const data = await response.json();
+      dispatch(noteActions.addNote(data));
+    } catch (err) {
+      alert(err);
+    }
   };
 };
 
 export const fetchNotes = (uid) => {
   return async (dispatch) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/notes/${uid}`
-    );
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/notes/${uid}`
+      );
 
-    const data = await response.json();
+      if (!response.ok) throw new Error("Error fetching notes");
 
-    dispatch(noteActions.retrieveNotes(data.notes));
+      const data = await response.json();
+
+      dispatch(noteActions.retrieveNotes(data.notes));
+    } catch (err) {
+      alert(err);
+    }
+  };
+};
+
+export const deleteNote = (nid) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes/${nid}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) throw new Error("Error deleting note");
+
+      dispatch(noteActions.removeNote(nid));
+    } catch (err) {
+      alert(err);
+    }
   };
 };
 
