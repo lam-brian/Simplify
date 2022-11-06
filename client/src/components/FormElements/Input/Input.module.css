@@ -31,8 +31,3 @@
 .form-control textarea {
   resize: vertical;
 }
-
-.form-control input:focus,
-.form-control textarea:focus {
-  outline: 2px solid var(--primary-blue-dark);
-}

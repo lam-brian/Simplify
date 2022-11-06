@@ -80,6 +80,11 @@ h5 {
   font-size: 1.6rem;
 }
 
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--primary-blue-dark);
+}
+
 .modal-enter {
   transform: translateY(-10rem);
   opacity: 0;

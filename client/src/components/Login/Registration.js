@@ -29,6 +29,8 @@ const Registration = () => {
     const password = enteredPassword.trim();
 
     dispatch(logUserIn(email, password));
+    setEnteredEmail("");
+    setEnteredPassword("");
   };
 
   const signupHandler = (e) => {
@@ -41,6 +43,9 @@ const Registration = () => {
     const password = enteredPassword;
 
     dispatch(signUserUp(name, email, password));
+    setEnteredName("");
+    setEnteredEmail("");
+    setEnteredPassword("");
   };
 
   const switchFormHandler = () => {

@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { loginActions } from "../../store/login-slice";
+import { noteActions } from "../../store/note-slice";
 
 import Button from "../FormElements/Button/Button";
 import { simplifyLogo, icons } from "../../images";
@@ -14,6 +16,7 @@ import styles from "./MainNavigation.module.css";
 const MainNavigation = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const navigate = useNavigate();
 
   return (
     <header className={`${styles.header} ${isLoggedIn ? styles.sidebar : ""}`}>
@@ -25,7 +28,7 @@ const MainNavigation = () => {
           <nav className={styles.nav}>
             <ul>
               <li>
-                <Button>
+                <Button onClick={() => navigate("/new-note")}>
                   <img src={icons.plus} alt="" /> Create study set
                 </Button>
               </li>
@@ -63,7 +66,12 @@ const MainNavigation = () => {
                 </NavLink>
               </li>
               <li>
-                <Button>
+                <Button
+                  onClick={() => {
+                    dispatch(loginActions.logout());
+                    dispatch(noteActions.clearNotes());
+                  }}
+                >
                   <LogoutIcon />
                   Logout
                 </Button>

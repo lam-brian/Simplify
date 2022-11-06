@@ -22,6 +22,9 @@ const loginSlice = createSlice({
     },
     logout(state) {
       state.isLoggedIn = false;
+      state.user.id = "";
+      state.user.username = "";
+      state.user.email = "";
     },
   },
 });
