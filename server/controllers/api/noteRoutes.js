@@ -50,6 +50,8 @@ router.patch("/:nid", async (req, res) => {
     const updatedNote = await Note.update(
       {
         highlights: req.body.highlights,
+        title: req.body.title,
+        summary: req.body.summary,
       },
       {
         where: {
