@@ -17,7 +17,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isChanged, setIsChanged] = useState(false);
-  const [highlights, setHighlights] = useState(keywords);
+  const [highlights, setHighlights] = useState(keywords || []);
 
   const [enteredTitle, setEnteredTitle] = useState(title);
   const [isTitleEditing, setIsTitleEditing] = useState(false);
@@ -33,6 +33,8 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   const sortRef = useRef(null);
   const titleRef = useRef(null);
   const summaryRef = useRef(null);
+
+  console.log(highlights, keywords);
 
   const openDeleteModalHandler = () => {
     setShowSettings(false);
@@ -149,6 +151,8 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
         return setIsChanged(true);
       } else setIsChanged(false);
     }
+
+    setIsChanged(false);
   }, [keywords, highlights, enteredTitle, title, enteredSummary, summary]);
 
   useEffect(() => {
@@ -254,7 +258,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
 
       <div className={styles.heading}>
         <div>
-          {!isTitleEditing && <h1>{title} Cards</h1>}
+          {!isTitleEditing && <h1>{enteredTitle} Cards</h1>}
           {isTitleEditing && (
             <input
               type="text"
@@ -292,7 +296,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
             <EditIcon />
           </Button>
         </div>
-        {!isSummaryEditing && <p>{summary}</p>}
+        {!isSummaryEditing && <p>{enteredSummary}</p>}
         {isSummaryEditing && (
           <textarea
             ref={summaryRef}
