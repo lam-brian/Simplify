@@ -23,8 +23,7 @@
 .formInputs label {
   font-size: 2rem;
   font-family: var(--font-fam-lora);
-  color: var(--primary-black);
-  font-size: 2rem;
+  color: var(--primary-blue-dark);
 }
 
 .formInputs input,
@@ -37,7 +36,7 @@
 }
 
 .title {
-  gap: 7.4rem;
+  gap: 2.4rem;
   margin-bottom: 3.2rem;
 }
 
@@ -54,7 +53,7 @@
 }
 
 .summary textarea {
-  padding: 3.2rem 2.4rem;
+  padding: 1.6rem 1.2rem;
   resize: none;
 }
 
@@ -65,6 +64,7 @@
 
 .highlights legend {
   font-family: var(--font-fam-lora);
+  color: var(--primary-blue-dark);
   font-size: 2rem;
   pointer-events: none;
   margin-bottom: 1.2rem;

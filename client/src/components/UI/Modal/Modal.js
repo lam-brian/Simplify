@@ -5,9 +5,19 @@ import { CSSTransition } from "react-transition-group";
 import Backdrop from "./Backdrop";
 import styles from "./Modal.module.css";
 
-const ModalOverlay = ({ header, footer, style, onSubmit, children }) => {
+const ModalOverlay = ({
+  header,
+  footer,
+  style,
+  onSubmit,
+  children,
+  className,
+}) => {
   const content = (
-    <div className={styles.modal} style={style || null}>
+    <div
+      className={`${styles.modal} ${className ? styles[className] : ""}`}
+      style={style || null}
+    >
       <header className={styles.header}>
         <h2>{header}</h2>
       </header>

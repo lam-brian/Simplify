@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
-
 import styles from "./Input.module.css";
 
-const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
-  const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    onInput(inputValue);
-  }, [onInput, inputValue]);
-
+const Input = ({
+  element,
+  label,
+  id,
+  type,
+  placeholder,
+  rows,
+  onInput,
+  value,
+  required,
+  minLength,
+}) => {
   const inputChangeHandler = (e) => {
-    setInputValue(e.target.value);
+    onInput(e.target.value);
   };
 
   const renderedElement =
@@ -20,7 +23,9 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         type={type}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        value={inputValue}
+        value={value}
+        required={required ? true : false}
+        minLength={minLength || undefined}
       />
     ) : (
       <textarea
@@ -28,7 +33,8 @@ const Input = ({ element, label, id, type, placeholder, rows, onInput }) => {
         rows={rows || 3}
         placeholder={placeholder || null}
         onChange={inputChangeHandler}
-        value={inputValue}
+        value={value}
+        required={required ? true : false}
       />
     );
 

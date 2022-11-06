@@ -7,7 +7,9 @@
 .form-control label {
   font-family: var(--font-fam-lora);
   font-weight: 600;
+  font-size: 1.8rem;
   margin-bottom: 1.2rem;
+  color: var(--primary-black);
 }
 
 .form-control input,

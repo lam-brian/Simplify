@@ -1,32 +1,70 @@
-.nav {
+.header {
   position: sticky;
-  top: 72px;
-  height: calc(100vh - 72px);
-  max-width: 27rem;
-  padding: 5.6rem 2.5rem;
-  background-color: var(--primary-white);
-  border-right: 1px solid #c8c8c8;
+  top: 0;
+  width: 100%;
+  padding: 1.2rem 4.8rem;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  gap: 2.4rem;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-blue-dark);
+  z-index: 9;
+}
+
+.header div > img {
+  height: 100%;
+  width: 100%;
+}
+
+.header.sidebar {
+  max-width: 27rem;
+  width: 25%;
+  height: 100vh;
+  padding: 4.8rem 2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: unset;
+}
+
+.nav {
+  margin-top: 5.6rem;
+}
+
+.nav li:first-child button {
+  width: 100%;
+  color: var(--primary-blue-dark);
+  background-color: var(--primary-blue-light);
+  border-radius: 6px;
+  display: flex;
+  padding: 1.2rem 2.4rem;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav nav li:first-child button:hover {
+  opacity: 75%;
+}
+
+.nav button {
+  width: 100%;
 }
 
 .nav ul {
   display: flex;
   flex-direction: column;
-  gap: 5.6rem;
+  gap: 3.2rem;
   list-style: none;
 }
 
 .nav a:link,
-.nav a:visited {
+.nav a:visited,
+.nav li:last-child button {
   transition: all 0.3s ease-out;
   display: flex;
   align-items: center;
-  gap: 2.8rem;
-  font-size: 2rem;
   text-decoration: none;
+  gap: 1.6rem;
+  font-size: 2rem;
   font-family: var(--font-fam-lora);
   color: var(--primary-grey-light);
   padding: 1.2rem;
@@ -34,16 +72,44 @@
 }
 
 .nav svg {
+  transition: all 0.3s ease-out;
   stroke: var(--primary-grey-light);
 }
 
 .nav a:hover,
 .nav a:active,
-.nav a.active {
-  background-color: var(--primary-blue-light);
-  color: var(--primary-blue-dark);
+.nav a.active,
+.nav li:last-child button:hover {
+  background-color: rgba(237, 243, 254, 0.1);
+  color: var(--primary-white);
 }
 
-.nav a.active svg {
-  stroke: var(--primary-blue-dark);
+.nav a:hover svg,
+.nav a.active svg,
+.nav li:last-child button:hover svg {
+  stroke: var(--primary-white);
+}
+
+.settings svg {
+  stroke: none;
+  fill: var(--primary-grey-light);
+}
+
+.settings a.active svg,
+.settings a:hover svg {
+  stroke: none;
+  fill: var(--primary-white);
+}
+
+.illustration {
+  margin-top: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.actions button:hover {
+  opacity: 75%;
 }

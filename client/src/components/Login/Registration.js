@@ -1,164 +1,174 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginActions } from "../../store/login-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { logUserIn, signUserUp } from "../../store/login-slice";
+import { uiActions } from "../../store/ui-slice";
 
+import Modal from "../UI/Modal/Modal";
+import Input from "../FormElements/Input/Input";
 import Button from "../FormElements/Button/Button";
-import { ReactComponent as CloseIcon } from "../../images/icons/close-circle.svg";
+import { icons } from "../../images";
 import styles from "./Registration.module.css";
 
-const Registration = ({ setOpenModal }) => {
-  const [index, setindex] = useState(0);
+const Registration = () => {
   const dispatch = useDispatch();
+  const { show: isLoginModal, isLogin: isLoginForm } = useSelector(
+    (state) => state.ui.isLoginModal
+  );
 
-  const loginFormHandler = async (event) => {
-    event.preventDefault();
-    const email = document.getElementById("email-login").value.trim();
-    const password = document.getElementById("password-login").value.trim();
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
-    if (email && password) {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/login`,
-        {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+  const loginHandler = (e) => {
+    e.preventDefault();
 
-      if (response.ok) {
-        const data = await response.json();
-        const { id, name, email } = data.user;
-        dispatch(loginActions.login({ id, username: name, email }));
-        setOpenModal(false);
-      } else {
-        alert(response.statusText);
-      }
-    }
+    if (!enteredEmail || !enteredPassword) return;
+
+    const email = enteredEmail.trim();
+    const password = enteredPassword.trim();
+
+    dispatch(logUserIn(email, password));
+    setEnteredEmail("");
+    setEnteredPassword("");
   };
 
-  const signupFormHandler = async (event) => {
-    event.preventDefault();
-    const name = document.getElementById("name-signup").value.trim();
-    const email = document.getElementById("email-signup").value.trim();
-    const password = document.getElementById("password-signup").value.trim();
-    if (name && email && password) {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
-        {
-          method: "POST",
-          body: JSON.stringify({ name, email, password }),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        const { id, name, email } = data;
-        dispatch(loginActions.login({ id, username: name, email }));
-        setOpenModal(false);
-      } else {
-        alert(response.statusText);
-      }
-    }
+  const signupHandler = (e) => {
+    e.preventDefault();
+
+    if (!enteredName || !enteredEmail || !enteredPassword || !isChecked) return;
+
+    const name = enteredName.trim();
+    const email = enteredEmail.trim();
+    const password = enteredPassword;
+
+    dispatch(signUserUp(name, email, password));
+    setEnteredName("");
+    setEnteredEmail("");
+    setEnteredPassword("");
   };
 
-  return (
+  const switchFormHandler = () => {
+    dispatch(uiActions.changeLoginModal());
+    setEnteredName("");
+    setEnteredEmail("");
+    setEnteredPassword("");
+    setIsChecked(false);
+  };
+
+  const closeModalHandler = () => {
+    dispatch(uiActions.closeLoginModal());
+  };
+
+  let formInputs = (
     <>
-      <div className={styles.container}>
-        <button
-          className={styles.close}
-          onClick={() => {
-            setOpenModal(false);
-          }}
-        >
-          <CloseIcon />
-        </button>
-        <div hidden={index !== 0}>
-          <div className={styles.signup}>Sign up</div>
-          <form onSubmit={signupFormHandler}>
-            <div className={styles.label}>Full name:</div>
-            <input
-              id="name-signup"
-              className={styles.input}
-              placeholder="John Smith"
-            />
-            <div className={styles.label}>Email:</div>
-            <input
-              id="email-signup"
-              className={styles.input}
-              placeholder="johnsmith@gmail.com"
-            />
-            <div className={styles.label}>Password:</div>
-            <input
-              id="password-signup"
-              type="password"
-              className={styles.input}
-              placeholder="Password"
-            />
-
-            <pre className={styles.term}>
-              <input className={styles.checkbox} type="checkbox" /> I accept the{" "}
-              <span className={styles.blue}>Terms of Use</span> &{" "}
-              <span className={styles.blue}>Privacy Policy</span>
-            </pre>
-            <Button
-              type="submit"
-              className="btn--primary"
-              style={{ width: "100%" }}
-            >
-              <pre className={styles.register}>Sign Up →</pre>
-            </Button>
-          </form>
-
-          <div className={styles.account}>
-            Have an account already?{" "}
-            <button
-              className={styles.login}
-              onClick={() => {
-                setindex(1);
-              }}
-            >
-              Log in
-            </button>
-          </div>
-        </div>
-        <div hidden={index !== 1}>
-          <div className={styles.signin}>Sign in</div>
-          <form onSubmit={loginFormHandler}>
-            <div className={styles.label}>Email:</div>
-            <input
-              id="email-login"
-              className={styles.input}
-              placeholder="johnsmith@gmail.com"
-            />
-            <div className={styles.label}>Password:</div>
-            <input
-              id="password-login"
-              type="password"
-              className={styles.input}
-              placeholder="Password"
-            />
-            <Button
-              type="submit"
-              className="btn--primary"
-              style={{ width: "100%" }}
-            >
-              <pre className={styles.register}>Sign In →</pre>
-            </Button>
-          </form>
-          <div className={styles.account}>
-            Go back to{" "}
-            <button
-              className={styles.login}
-              onClick={() => {
-                setindex(0);
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        </div>
+      <Input
+        element="input"
+        label="Full Name"
+        id="name"
+        type="text"
+        placeholder="John Smith"
+        required
+        onInput={setEnteredName}
+        value={enteredName}
+      />
+      <Input
+        element="input"
+        label="Email"
+        id="email"
+        type="email"
+        placeholder="johnsmith@gmail.com"
+        required
+        onInput={setEnteredEmail}
+        value={enteredEmail}
+      />
+      <Input
+        element="input"
+        label="Password"
+        id="password"
+        type="password"
+        minlength="9"
+        required
+        onInput={setEnteredPassword}
+        value={enteredPassword}
+      />
+      <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          id="terms-conditions"
+          value={isChecked}
+          required
+          onChange={() => setIsChecked((state) => !state)}
+        />
+        <label htmlFor="terms-conditions">
+          I accept the <a href="#terms">Terms of Use</a> &{" "}
+          <a href="#privacy">Privacy Policy</a>
+        </label>
       </div>
     </>
+  );
+
+  if (isLoginForm) {
+    formInputs = (
+      <>
+        <Input
+          element="input"
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="johnsmith@gmail.com"
+          required
+          onInput={setEnteredEmail}
+          value={enteredEmail}
+        />
+        <Input
+          element="input"
+          label="Password"
+          id="password"
+          type="password"
+          required
+          onInput={setEnteredPassword}
+          value={enteredPassword}
+        />
+      </>
+    );
+  }
+
+  return (
+    <Modal
+      show={isLoginModal}
+      onCancel={closeModalHandler}
+      className="registration"
+      header={isLoginForm ? "Log in" : "Sign up"}
+      style={{ padding: "4.8rem 3.2rem" }}
+      onSubmit={isLoginForm ? loginHandler : signupHandler}
+      footer={
+        <>
+          <Button className="btn--primary" type="submit">
+            {isLoginForm ? "Log in" : "Sign up"}
+          </Button>
+          <p>
+            {isLoginForm
+              ? "Don't have an account? "
+              : "Have an account already? "}
+            <Button style={{ width: "unset" }} onClick={switchFormHandler}>
+              {isLoginForm ? "Sign up" : "Log in"}
+            </Button>
+          </p>
+        </>
+      }
+    >
+      <>
+        <button
+          className={styles.closeBtn}
+          type="button"
+          onClick={closeModalHandler}
+        >
+          <img src={icons.closeCircle} alt="close form" />
+        </button>
+        {formInputs}
+      </>
+    </Modal>
   );
 };
 

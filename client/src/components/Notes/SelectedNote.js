@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { noteActions, deleteNote, patchNote } from "../../store/note-slice";
+import { deleteNote, patchNote } from "../../store/note-slice";
+
 import { icons } from "../../images";
+import { ReactComponent as EditIcon } from "../../images/icons/edit.svg";
 import { ReactComponent as ArrowDownIcon } from "../../images/icons/arrowDownComponent.svg";
 import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrowUpComponent.svg";
 import { ReactComponent as TrashIcon } from "../../images/icons/trash.svg";
@@ -15,21 +17,24 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isChanged, setIsChanged] = useState(false);
-  const [highlights, setHighlights] = useState(keywords);
+  const [highlights, setHighlights] = useState(keywords || []);
+
+  const [enteredTitle, setEnteredTitle] = useState(title);
+  const [isTitleEditing, setIsTitleEditing] = useState(false);
+
+  const [enteredSummary, setEnteredSummary] = useState(summary);
+  const [isSummaryEditing, setIsSummaryEditing] = useState(false);
+
   const [showSettings, setShowSettings] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSortOptions, setShowSortOptions] = useState(false);
   const [newCardIndex, setNewCardIndex] = useState(undefined);
   const settingsRef = useRef(null);
   const sortRef = useRef(null);
+  const titleRef = useRef(null);
+  const summaryRef = useRef(null);
 
-  const showSettingsHandler = () => {
-    setShowSettings(true);
-  };
-
-  const hideSettingsHandler = () => {
-    setShowSettings(false);
-  };
+  console.log(highlights, keywords);
 
   const openDeleteModalHandler = () => {
     setShowSettings(false);
@@ -46,19 +51,23 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
 
   const cancelChangesHandler = () => {
     setHighlights(keywords);
+    setEnteredTitle(title);
+    setEnteredSummary(summary);
   };
 
   const saveChangesHandler = () => {
     if (
       highlights.some(
         (word) => word.word.trim() === "" || word.definition.trim() === ""
-      )
+      ) ||
+      !enteredTitle.trim() ||
+      !enteredSummary.trim()
     ) {
       alert("Please fill in all inputs");
       return;
     }
 
-    dispatch(patchNote(id, highlights));
+    dispatch(patchNote(id, highlights, enteredTitle, enteredSummary));
   };
 
   const deleteStudySetHandler = () => {
@@ -66,14 +75,26 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
     navigate("/");
   };
 
-  const editKeywordHandler = (i, word) => {
+  const starKeywordHandler = (i) => {
     const words = [...highlights];
-    const oldWord = words[i];
+
+    const currWord = words[i];
 
     words[i] = {
+      ...words[i],
+      starred: currWord.starred ? false : true,
+    };
+
+    setHighlights(words);
+    dispatch(patchNote(id, words, enteredTitle, enteredSummary));
+  };
+
+  const editKeywordHandler = (i, word) => {
+    const words = [...highlights];
+
+    words[i] = {
+      ...words[i],
       word,
-      score: oldWord.score,
-      definition: oldWord.definition,
     };
 
     setHighlights(words);
@@ -81,11 +102,9 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
 
   const editDefinitionHandler = (i, definition) => {
     const words = [...highlights];
-    const oldWord = words[i];
 
     words[i] = {
-      word: oldWord.word,
-      score: oldWord.score,
+      ...words[i],
       definition,
     };
 
@@ -113,7 +132,11 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   useEffect(() => {
     const originalKeywords = keywords;
 
-    if (originalKeywords.length !== highlights.length) {
+    if (
+      originalKeywords.length !== highlights.length ||
+      enteredTitle !== title ||
+      enteredSummary !== summary
+    ) {
       return setIsChanged(true);
     }
 
@@ -128,14 +151,16 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
         return setIsChanged(true);
       } else setIsChanged(false);
     }
-  }, [keywords, highlights]);
+
+    setIsChanged(false);
+  }, [keywords, highlights, enteredTitle, title, enteredSummary, summary]);
 
   useEffect(() => {
     const currentSettingsRef = settingsRef.current;
 
     function handleClickOutside(event) {
       if (currentSettingsRef && !currentSettingsRef.contains(event.target)) {
-        hideSettingsHandler();
+        setShowSettings(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -159,12 +184,32 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   }, [showSortOptions]);
 
   useEffect(() => {
-    dispatch(noteActions.enterNote());
+    const curretTitleRef = titleRef.current;
 
+    function handleClickOutside(event) {
+      if (curretTitleRef && !curretTitleRef.contains(event.target)) {
+        setIsTitleEditing(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      dispatch(noteActions.exitNote());
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dispatch]);
+  }, [isTitleEditing]);
+
+  useEffect(() => {
+    const curretSummaryRef = summaryRef.current;
+
+    function handleClickOutside(event) {
+      if (curretSummaryRef && !curretSummaryRef.contains(event.target)) {
+        setIsSummaryEditing(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSummaryEditing]);
 
   const renderedCards = highlights.map((word, i) => {
     return (
@@ -178,6 +223,8 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
         onDelete={deleteKeywordHandler}
         onEditKeyword={editKeywordHandler}
         onEditDefinition={editDefinitionHandler}
+        onStarKeyword={starKeywordHandler}
+        isStarred={word.starred ? true : false}
       />
     );
   });
@@ -210,9 +257,25 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
       </Modal>
 
       <div className={styles.heading}>
-        <h1>{title}</h1>
-        <Button onClick={showSettingsHandler}>
-          <img src={icons.settings} alt="settings" />
+        <div>
+          {!isTitleEditing && <h1>{enteredTitle} Cards</h1>}
+          {isTitleEditing && (
+            <input
+              type="text"
+              ref={titleRef}
+              value={enteredTitle}
+              onChange={(e) => setEnteredTitle(e.target.value)}
+            />
+          )}
+          <Button
+            className={isTitleEditing ? "active" : ""}
+            onClick={() => setIsTitleEditing(true)}
+          >
+            <EditIcon />
+          </Button>
+        </div>
+        <Button onClick={() => setShowSettings(true)}>
+          <img src={icons.gear} alt="settings" />
         </Button>
         {showSettings && (
           <div className={styles.dropdown} ref={settingsRef}>
@@ -224,13 +287,28 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
       </div>
 
       <div className={styles.summary}>
-        <h2>Summary</h2>
-        <p>{summary}</p>
+        <div>
+          <h2>Summary</h2>
+          <Button
+            className={isSummaryEditing ? "active" : ""}
+            onClick={() => setIsSummaryEditing(true)}
+          >
+            <EditIcon />
+          </Button>
+        </div>
+        {!isSummaryEditing && <p>{enteredSummary}</p>}
+        {isSummaryEditing && (
+          <textarea
+            ref={summaryRef}
+            value={enteredSummary}
+            onChange={(e) => setEnteredSummary(e.target.value)}
+          />
+        )}
       </div>
 
       <fieldset className={styles.highlights}>
         <div className={styles.subHeading}>
-          <legend>Key Highlights</legend>
+          <legend>Key Highlights ({highlights.length})</legend>
           <button
             className={styles["btn--sort"]}
             onClick={toggleShowSortOptions}
@@ -240,7 +318,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
           {showSortOptions && (
             <div className={styles.sortMenu} ref={sortRef}>
               <div>
-                <label htmlFor="alphabetical">alphabetical</label>
+                <label htmlFor="alphabetical">Alphabetical</label>
                 <input type="checkbox" id="alphabetical" />
               </div>
               <div>

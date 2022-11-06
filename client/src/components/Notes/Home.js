@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import Helmet from "react-helmet";
 
 import { ReactComponent as ArrowDownIcon } from "../../images/icons/arrowDownComponent.svg";
 import { ReactComponent as ArrowUpIcon } from "../../images/icons/arrowUpComponent.svg";
@@ -9,7 +8,6 @@ import { illustrations } from "../../images";
 import styles from "./Home.module.css";
 
 const Home = ({ notes, user }) => {
-
   const [showSortOptions, setShowSortOptions] = useState(false);
   const sortRef = useRef(null);
 
@@ -46,11 +44,13 @@ const Home = ({ notes, user }) => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: "background-color : #EDF3FE" }} />
       <div className={styles.banner}>
         <div className={styles.heading}>
           <h1>Welcome back, {firstName}</h1>
-          <p>Let's start studying</p>
+          <p>
+            Welcome to Simplify! Streamline your study process by using our
+            summarizer that automatically create flashcards for you.
+          </p>
         </div>
         <div className={styles.illustration}>
           <img src={illustrations.laptop} alt="" />

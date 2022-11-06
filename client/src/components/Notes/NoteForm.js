@@ -14,8 +14,10 @@ const NoteForm = ({ summary, keywords }) => {
   const userId = useSelector((state) => state.login.user.id);
 
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredSummary, setEnteredSummary] = useState(summary);
-  const [highlights, setHighlights] = useState(keywords);
+  const [enteredSummary, setEnteredSummary] = useState(summary || "");
+  const [highlights, setHighlights] = useState(
+    keywords || [{ word: "", definition: "", score: 1 }]
+  );
   const textAreaRef = useRef(null);
 
   const titleInputHandler = (e) => {
@@ -54,7 +56,11 @@ const NoteForm = ({ summary, keywords }) => {
 
   const addNewCardHandler = () => {
     const words = [...highlights];
-    const newWord = { word: "", definition: "", score: null };
+    const newWord = {
+      word: "",
+      definition: "",
+      score: (words.at(-1)?.score || 0) + 1,
+    };
     words.push(newWord);
     setHighlights(words);
   };
@@ -79,7 +85,7 @@ const NoteForm = ({ summary, keywords }) => {
       keywordsIsValid = false;
     }
 
-    if (!enteredTitle || !summary || !keywordsIsValid) {
+    if (!enteredTitle || !enteredSummary || !keywordsIsValid) {
       alert("Please fill in all inputs");
       return;
     }
@@ -95,14 +101,6 @@ const NoteForm = ({ summary, keywords }) => {
     dispatch(saveNoteToDB(note));
     navigate("/");
   };
-
-  useEffect(() => {
-    dispatch(noteActions.enterNote());
-
-    return () => {
-      dispatch(noteActions.exitNote());
-    };
-  }, [dispatch]);
 
   useEffect(() => {
     const currentRef = textAreaRef.current;
@@ -129,7 +127,7 @@ const NoteForm = ({ summary, keywords }) => {
   return (
     <form className={styles.noteForm} onSubmit={submitFormHandler}>
       <div className={styles.heading}>
-        <h1>Create a new study set</h1>
+        <h1>Create a study set</h1>
         <div className={styles.buttons}>
           <Button className="btn--secondary" onClick={cancelFormHandler}>
             Cancel
@@ -161,7 +159,7 @@ const NoteForm = ({ summary, keywords }) => {
       </div>
 
       <fieldset className={styles.highlights}>
-        <legend>Key Highlights</legend>
+        <legend>Key Highlights ({highlights.length})</legend>
         <div className={styles.cards}>{renderedCards}</div>
       </fieldset>
 

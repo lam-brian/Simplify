@@ -11,7 +11,8 @@
 }
 
 .btn--primary,
-.btn--secondary {
+.btn--secondary,
+.btn--danger {
   padding: 1.2rem 2.4rem;
   border-radius: 6px;
 }
@@ -26,9 +27,14 @@
   color: var(--primary-blue-dark);
 }
 
+.btn--danger {
+  border: 1px solid var(--state-red);
+  color: var(--state-red);
+}
+
 .btn--light {
   color: var(--primary-blue-dark);
-  background-color: var(--primary-blue-light);
+  background-color: var(--primary-white);
   padding: 1.6rem 1.2rem;
   font-weight: 700;
   font-size: 2rem;
@@ -43,21 +49,18 @@
   transform: translateY(5px);
 }
 
-.btn--avatar {
-  font-family: var(--font-fam-lora);
-  background-color: var(--primary-white);
-  height: 4rem;
-  width: 4rem;
-  border-radius: 50%;
-  font-size: 2.4rem;
+.btn.btn--favorite svg {
+  fill: none;
 }
 
-.btn--favorite svg {
-  fill: none;
+.btn.btn--favorite-active svg {
+  fill: var(--primary-blue-dark);
+  stroke: var(--primary-blue-dark);
 }
 
 .btn svg {
   transition: all 0.3s ease-out;
+  stroke: var(--primary-grey-light);
 }
 
 .btn:hover svg {
@@ -66,4 +69,8 @@
 
 .btn.active svg {
   stroke: var(--primary-blue-dark);
+}
+
+.btn:disabled {
+  opacity: 50%;
 }

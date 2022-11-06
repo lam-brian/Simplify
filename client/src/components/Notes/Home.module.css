@@ -5,24 +5,22 @@
   justify-content: space-between;
   box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
   border-radius: 16px;
-  padding: 1.8rem 6.4rem;
+  padding: 0 3.6rem;
   margin-bottom: 4.8rem;
-}
-
-.heading {
-  flex: 1 0 20%;
+  gap: 4.8rem;
 }
 
 .heading h1 {
   color: var(--primary-blue-dark);
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.2rem;
   font-size: 3.6rem;
   line-height: 1.25;
 }
 
 .heading p {
   color: var(--primary-grey-dark);
-  font-size: 2.4rem;
+  font-size: 2.2rem;
+  line-height: 150%;
 }
 
 .illustration {
@@ -42,14 +40,15 @@
 }
 
 .header h2 {
-  font-size: 2rem;
+  font-size: 2.4rem;
+  color: var(--primary-blue-dark);
 }
 
 .header button {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--primary-black);
+  color: var(--primary-blue-dark);
   font-family: var(--font-fam-lora);
   font-size: 1.8rem;
   display: flex;
@@ -58,7 +57,7 @@
 }
 
 .header button svg {
-  stroke: var(--primary-black);
+  stroke: var(--primary-blue-dark);
 }
 
 .btn--sort {
@@ -100,6 +99,11 @@
   gap: 10rem;
 }
 
+.cardFrame > p {
+  color: var(--primary-blue-dark);
+  font-weight: 600;
+}
+
 @media (max-width: 1675px) {
   .cardFrame {
     grid-template-columns: repeat(3, 1fr);
@@ -112,11 +116,15 @@
   }
 
   .heading p {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
 @media (max-width: 1157px) {
+  .banner {
+    padding: 1.2rem 2.4rem;
+  }
+
   .cardFrame {
     gap: 4.8rem;
   }

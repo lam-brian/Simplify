@@ -1,0 +1,62 @@
+.heading {
+  color: var(--primary-blue-dark);
+  margin-bottom: 3.2rem;
+}
+
+.container {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.avatar {
+  background-color: var(--primary-white);
+  color: var(--primary-blue-dark);
+  font-family: var(--font-fam-lora);
+  font-weight: 700;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6.9rem;
+}
+
+.content {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.content > div {
+  background-color: var(--primary-white);
+  padding: 24px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  box-shadow: 0px 4px 13px rgba(29, 66, 109, 0.25);
+  border-radius: 16px;
+}
+
+.content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.content h3 {
+  font-family: var(--font-fam-lora);
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.profileDetails p {
+  border: 1px solid #b2b2b2;
+  padding: 1.2rem;
+  border-radius: 6px;
+  font-size: 2rem;
+}
+
+.content button {
+  width: 50%;
+}

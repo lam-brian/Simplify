@@ -15,6 +15,8 @@ const NoteCard = ({
   onDelete,
   onEditKeyword,
   onEditDefinition,
+  onStarKeyword,
+  isStarred,
 }) => {
   const [highlight, setHighlight] = useState(keyword || "");
   const [wordDefinition, setWordDefinition] = useState(definition || "");
@@ -89,7 +91,10 @@ const NoteCard = ({
   if (active) {
     buttons = (
       <div className={styles.actions}>
-        <Button className="btn--favorite">
+        <Button
+          className={isStarred ? "btn--favorite-active" : "btn--favorite"}
+          onClick={onStarKeyword.bind(null, index)}
+        >
           <StarIcon />
         </Button>
         <Button

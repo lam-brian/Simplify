@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uiActions } from "./ui-slice";
 
 const noteSlice = createSlice({
   name: "note",
   initialState: {
-    isNoteMode: false,
+    summarizedData: {},
     newNote: {},
     notes: [],
   },
   reducers: {
-    enterNote(state) {
-      state.isNoteMode = true;
-    },
-    exitNote(state) {
-      state.isNoteMode = false;
+    summarize(state, action) {
+      state.summarizedData = action.payload;
     },
     saveNote(state, action) {
       const words = [...action.payload.keywords];
@@ -60,14 +58,46 @@ const noteSlice = createSlice({
       const note = state.notes.find((note) => note.id === action.payload.id);
 
       note.keywords = action.payload.keywords;
+      note.title = action.payload.title;
+      note.summary = action.payload.summary;
     },
     removeNote(state, action) {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
+    },
+    clearNotes(state) {
+      state.notes = [];
     },
   },
 });
 
 export const noteActions = noteSlice.actions;
+
+export const summarizeData = (url, text) => {
+  return async (dispatch) => {
+    dispatch(uiActions.setIsLoading(true));
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, text }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to summarize, please try again!");
+      }
+
+      const { summary, keywords } = await response.json();
+      dispatch(noteActions.summarize({ summary, keywords }));
+      dispatch(uiActions.setIsLoading(false));
+    } catch (err) {
+      dispatch(uiActions.setIsLoading(false));
+      alert(err);
+    }
+  };
+};
 
 export const saveNoteToDB = (note) => {
   return async (dispatch) => {
@@ -128,21 +158,28 @@ export const deleteNote = (nid) => {
   };
 };
 
-export const patchNote = (nid, highlights) => {
+export const patchNote = (nid, highlights, title, summary) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/notes/${nid}`,
         {
           method: "PATCH",
-          body: JSON.stringify({ highlights }),
+          body: JSON.stringify({ highlights, title, summary }),
           headers: { "Content-Type": "application/json" },
         }
       );
 
       if (!response.ok) throw new Error("Error updating note");
 
-      dispatch(noteActions.updateNote({ id: nid, keywords: highlights }));
+      dispatch(
+        noteActions.updateNote({
+          id: nid,
+          keywords: highlights,
+          title,
+          summary,
+        })
+      );
     } catch (err) {
       alert(err);
     }

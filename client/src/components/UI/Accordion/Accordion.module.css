@@ -18,6 +18,7 @@
   transform-origin: top;
   transform: scaleY(0);
   height: 0;
+  background-color: var(--primary-white);
 }
 
 .content > div {
