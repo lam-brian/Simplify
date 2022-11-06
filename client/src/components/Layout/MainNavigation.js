@@ -1,36 +1,93 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
+import Button from "../FormElements/Button/Button";
+import { simplifyLogo, icons } from "../../images";
 import { ReactComponent as HomeIcon } from "../../images/icons/home.svg";
 import { ReactComponent as DocumentIcon } from "../../images/icons/document-text.svg";
+import { ReactComponent as SettingsIcon } from "../../images/icons/settings.svg";
+import { ReactComponent as LogoutIcon } from "../../images/icons/logout.svg";
 import { illustrations } from "../../images";
 import styles from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
-  return (
-    <nav className={styles.nav}>
-      <ul>
-        <li>
-          <NavLink
-            className={(navData) => (navData.isActive ? styles.active : "")}
-            to="/home"
-          >
-            <HomeIcon />
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={(navData) => (navData.isActive ? styles.active : "")}
-            to="/summarize"
-          >
-            <DocumentIcon />
-            Summarize
-          </NavLink>
-        </li>
-      </ul>
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
-      <img src={illustrations.books} alt="" />
-    </nav>
+  return (
+    <header className={`${styles.header} ${isLoggedIn ? styles.sidebar : ""}`}>
+      <div className={styles.logo}>
+        <img src={simplifyLogo} alt="logo" />
+      </div>
+      {isLoggedIn && (
+        <>
+          <nav className={styles.nav}>
+            <ul>
+              <li>
+                <Button>
+                  <img src={icons.plus} alt="" /> Create study set
+                </Button>
+              </li>
+              <li>
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive ? styles.active : ""
+                  }
+                  to="/home"
+                >
+                  <HomeIcon />
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive ? styles.active : ""
+                  }
+                  to="/summarize"
+                >
+                  <DocumentIcon />
+                  Summarize
+                </NavLink>
+              </li>
+              <li className={styles.settings}>
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive ? styles.active : ""
+                  }
+                  to="/settings"
+                >
+                  <SettingsIcon />
+                  Account Settings
+                </NavLink>
+              </li>
+              <li>
+                <Button>
+                  <LogoutIcon />
+                  Logout
+                </Button>
+              </li>
+            </ul>
+          </nav>
+          <div className={styles.illustration}>
+            <img src={illustrations.books} alt="" />
+          </div>
+        </>
+      )}
+      {!isLoggedIn && (
+        <div className={styles.actions}>
+          <Button style={{ color: "var(--primary-white" }}>Log in</Button>
+          <Button
+            className="btn--primary"
+            style={{
+              backgroundColor: "var(--primary-blue-light)",
+              color: "var(--primary-blue-dark)",
+            }}
+          >
+            Sign Up
+          </Button>
+        </div>
+      )}
+    </header>
   );
 };
 

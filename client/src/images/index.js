@@ -1,6 +1,5 @@
-// logos
+// logo
 import logo from "./logo.svg";
-import logoLogged from "./logo-logged.svg";
 
 //illustrations
 import books from "./illustration-books.svg";
@@ -20,11 +19,11 @@ import logout from "./icons/logout.svg";
 import notification from "./icons/notification.svg";
 import plus from "./icons/plus.svg";
 import search from "./icons/search.svg";
-import settings from "./icons/settings.svg";
+import gear from "./icons/gear.svg";
 import star from "./icons/star.svg";
 import user from "./icons/user.svg";
 
-export const logos = { logo, logoLogged };
+export const simplifyLogo = logo;
 export const illustrations = { books, laptop };
 export const icons = {
   arrowDown,
@@ -40,7 +39,7 @@ export const icons = {
   notification,
   plus,
   search,
-  settings,
+  gear,
   star,
   user,
 };

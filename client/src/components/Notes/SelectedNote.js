@@ -212,7 +212,7 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
       <div className={styles.heading}>
         <h1>{title}</h1>
         <Button onClick={showSettingsHandler}>
-          <img src={icons.settings} alt="settings" />
+          <img src={icons.gear} alt="settings" />
         </Button>
         {showSettings && (
           <div className={styles.dropdown} ref={settingsRef}>
