@@ -39,7 +39,7 @@
   }
 }
 
-.registration header {
+.registration .header {
   margin-bottom: 2.4rem;
   text-align: center;
   color: var(--primary-blue-dark);
@@ -62,5 +62,17 @@
 }
 
 .delete .footer button {
+  width: unset;
+}
+
+.password .header {
+  margin-bottom: 2.4rem;
+}
+
+.password .footer {
+  justify-content: flex-end;
+}
+
+.password .footer button {
   width: unset;
 }

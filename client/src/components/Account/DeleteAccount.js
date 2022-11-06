@@ -48,7 +48,7 @@ const DeleteAccount = ({ show, onCancel, onSubmit }) => {
         Are you sure you want to delete the account linked to
         josephsmith@gmail.com. You will not be able to undo.
       </p>
-      <button className={styles.close}>
+      <button className={styles.close} onClick={onCancel} type="button">
         <img src={icons.closeCircle} alt="close modal" />
       </button>
     </Modal>

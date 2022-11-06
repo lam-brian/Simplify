@@ -1,36 +1,50 @@
+import Modal from "../UI/Modal/Modal";
+import Input from "../FormElements/Input/Input";
+import Button from "../FormElements/Button/Button";
 import styles from "./ChangePassword.module.css";
-import Vector from "../../images/icons/close-circle.svg";
-const ChangePassword = ({ setOpenModal }) => {
+import { icons } from "../../images";
+
+const ChangePassword = ({ show, onCancel, onSubmit }) => {
   return (
-    <>
-      <div className={styles.container}>
-        <button
-          className={styles.close}
-          onClick={() => {
-            setOpenModal(false);
-          }}
-        >
-          <img className={styles.vector} src={Vector} alt="" />
-        </button>
-        <h1>Change your password</h1>
-        <form>
-          <div className={styles.label}>Current password</div>
-          <input type="password" className={styles.input} />
-          <div className={styles.label}>New password</div>
-          <input type="password" className={styles.input} />
-          <div className={styles.label}>Repeat new password</div>
-          <input type="password" className={styles.input} />
-          <button
-            className={styles.delete}
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          >
+    <Modal
+      show={show}
+      onCancel={onCancel}
+      header="Change your password"
+      className="password"
+      footer={
+        <>
+          <Button className="btn--secondary">Cancel</Button>
+          <Button className="btn--primary" type="submit">
             Set new password
-          </button>
-        </form>
-      </div>
-    </>
+          </Button>
+        </>
+      }
+    >
+      <>
+        <Input
+          element="input"
+          label="Current password"
+          id="current-password"
+          type="text"
+        />
+        <Input
+          element="input"
+          label="New password"
+          id="new-password"
+          type="text"
+          minLength={9}
+        />
+        <Input
+          element="input"
+          label="Repeat new password"
+          id="new-password-repeat"
+          type="text"
+        />
+        <button className={styles.close} onClick={onCancel} type="button">
+          <img src={icons.closeCircle} alt="close form" />
+        </button>
+      </>
+    </Modal>
   );
 };
 

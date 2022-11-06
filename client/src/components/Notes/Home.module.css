@@ -99,6 +99,11 @@
   gap: 10rem;
 }
 
+.cardFrame > p {
+  color: var(--primary-blue-dark);
+  font-weight: 600;
+}
+
 @media (max-width: 1675px) {
   .cardFrame {
     grid-template-columns: repeat(3, 1fr);

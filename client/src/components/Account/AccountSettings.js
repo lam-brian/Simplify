@@ -10,6 +10,7 @@ import Button from "../FormElements/Button/Button";
 const AccountSettings = ({ username, email, id }) => {
   const dispatch = useDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const deleteAccountHandler = () => {
     dispatch(deleteAccount(id));
@@ -17,11 +18,6 @@ const AccountSettings = ({ username, email, id }) => {
 
   return (
     <>
-      <DeleteAccount
-        show={isDeleteModalOpen}
-        onCancel={() => setIsDeleteModalOpen(false)}
-        onSubmit={deleteAccountHandler}
-      />
       <h1 className={styles.heading}>Account Settings</h1>
       <div className={styles.container}>
         <div className={styles.avatar}>{username[0].toUpperCase()}</div>
@@ -36,7 +32,12 @@ const AccountSettings = ({ username, email, id }) => {
               <h3>Email</h3>
               <p>{email}</p>
             </div>
-            <Button className="btn--secondary">Change password</Button>
+            <Button
+              className="btn--secondary"
+              onClick={() => setIsPasswordModalOpen(true)}
+            >
+              Change password
+            </Button>
           </div>
           <div>
             <h2>Close account</h2>
@@ -49,6 +50,15 @@ const AccountSettings = ({ username, email, id }) => {
           </div>
         </div>
       </div>
+      <ChangePassword
+        show={isPasswordModalOpen}
+        onCancel={() => setIsPasswordModalOpen(false)}
+      />
+      <DeleteAccount
+        show={isDeleteModalOpen}
+        onCancel={() => setIsDeleteModalOpen(false)}
+        onSubmit={deleteAccountHandler}
+      />
     </>
   );
 };
