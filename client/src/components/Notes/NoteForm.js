@@ -97,14 +97,6 @@ const NoteForm = ({ summary, keywords }) => {
   };
 
   useEffect(() => {
-    dispatch(noteActions.enterNote());
-
-    return () => {
-      dispatch(noteActions.exitNote());
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
     const currentRef = textAreaRef.current;
 
     if (currentRef) {

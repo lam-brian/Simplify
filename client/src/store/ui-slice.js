@@ -5,6 +5,7 @@ const initialState = {
     show: false,
     isLogin: true,
   },
+  isLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -20,6 +21,9 @@ const uiSlice = createSlice({
     },
     changeLoginModal(state) {
       state.isLoginModal.isLogin = !state.isLoginModal.isLogin;
+    },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload;
     },
   },
 });

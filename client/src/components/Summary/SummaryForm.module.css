@@ -6,3 +6,36 @@
   margin-top: 2.4rem;
   width: 100%;
 }
+
+.form label {
+  color: var(--primary-blue-dark);
+}
+
+.divider {
+  margin-bottom: 2.4rem;
+  font-family: var(--font-fam-lora);
+  font-size: 1.8rem;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.divider::before {
+  left: 0;
+  top: 50%;
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 45%;
+  background-color: var(--primary-grey-light);
+}
+
+.divider::after {
+  right: 0;
+  top: 50%;
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 45%;
+  background-color: var(--primary-grey-light);
+}

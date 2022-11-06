@@ -9,11 +9,13 @@ import Setting from "./pages/Setting";
 import ActiveNote from "./pages/ActiveNote";
 import Layout from "./components/Layout/Layout";
 import Registration from "./components/Login/Registration";
+import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login.user);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoading = useSelector((state) => state.ui.isLoading);
 
   let routes;
 
@@ -48,6 +50,7 @@ function App() {
   return (
     <>
       <Registration />
+      {isLoading && <LoadingSpinner isLoading={isLoading} />}
       <Layout>
         <Routes>{routes}</Routes>
       </Layout>

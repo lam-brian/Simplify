@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uiActions } from "./ui-slice";
 
 const noteSlice = createSlice({
   name: "note",
   initialState: {
-    isNoteMode: false,
+    summarizedData: {},
     newNote: {},
     notes: [],
   },
   reducers: {
-    enterNote(state) {
-      state.isNoteMode = true;
-    },
-    exitNote(state) {
-      state.isNoteMode = false;
+    summarize(state, action) {
+      state.summarizedData = action.payload;
     },
     saveNote(state, action) {
       const words = [...action.payload.keywords];
@@ -68,6 +66,33 @@ const noteSlice = createSlice({
 });
 
 export const noteActions = noteSlice.actions;
+
+export const summarizeData = (url, text) => {
+  return async (dispatch) => {
+    dispatch(uiActions.setIsLoading(true));
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/notes`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, text }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to summarize, please try again!");
+      }
+
+      const { summary, keywords } = await response.json();
+      dispatch(noteActions.summarize({ summary, keywords }));
+      dispatch(uiActions.setIsLoading(false));
+    } catch (err) {
+      dispatch(uiActions.setIsLoading(false));
+      alert(err);
+    }
+  };
+};
 
 export const saveNoteToDB = (note) => {
   return async (dispatch) => {
