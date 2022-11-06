@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 
 import Button from "../FormElements/Button/Button";
 import { simplifyLogo, icons } from "../../images";
@@ -11,6 +12,7 @@ import { illustrations } from "../../images";
 import styles from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   return (
@@ -75,13 +77,19 @@ const MainNavigation = () => {
       )}
       {!isLoggedIn && (
         <div className={styles.actions}>
-          <Button style={{ color: "var(--primary-white" }}>Log in</Button>
+          <Button
+            style={{ color: "var(--primary-white" }}
+            onClick={() => dispatch(uiActions.openLoginModal("login"))}
+          >
+            Log in
+          </Button>
           <Button
             className="btn--primary"
             style={{
               backgroundColor: "var(--primary-blue-light)",
               color: "var(--primary-blue-dark)",
             }}
+            onClick={() => dispatch(uiActions.openLoginModal("signup"))}
           >
             Sign Up
           </Button>

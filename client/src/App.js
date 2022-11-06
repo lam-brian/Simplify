@@ -3,11 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchNotes } from "./store/note-slice";
 import Summarize from "./pages/Summarize";
-import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import NewNote from "./pages/NewNote";
 import Setting from "./pages/Setting";
 import ActiveNote from "./pages/ActiveNote";
+import Layout from "./components/Layout/Layout";
+import Registration from "./components/Login/Registration";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,9 +46,12 @@ function App() {
   }
 
   return (
-    <Layout>
-      <Routes>{routes}</Routes>
-    </Layout>
+    <>
+      <Registration />
+      <Layout>
+        <Routes>{routes}</Routes>
+      </Layout>
+    </>
   );
 }
 

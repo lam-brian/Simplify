@@ -31,6 +31,24 @@
 @media (min-width: 768px) {
   .modal {
     left: calc(50% - 20rem);
-    width: 40rem;
+    width: 50rem;
   }
+}
+
+.registration header {
+  margin-bottom: 2.4rem;
+  text-align: center;
+  color: var(--primary-blue-dark);
+}
+
+.registration input {
+  font-size: 2rem;
+}
+
+.registration .footer {
+  flex-direction: column;
+}
+
+.registration .footer p {
+  font-family: var(--font-fam-lora);
 }
