@@ -5,7 +5,7 @@ import { fetchNotes } from "./store/note-slice";
 import Summarize from "./pages/Summarize";
 import HomePage from "./pages/HomePage";
 import NewNote from "./pages/NewNote";
-import Setting from "./pages/Setting";
+import Settings from "./pages/Settings";
 import ActiveNote from "./pages/ActiveNote";
 import Layout from "./components/Layout/Layout";
 import Registration from "./components/Login/Registration";
@@ -33,7 +33,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/new-note" element={<NewNote />} />
         <Route path="/notes/:noteId" element={<ActiveNote />} />
-        <Route path="/setting" element={<Setting />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </>
     );

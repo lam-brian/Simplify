@@ -11,7 +11,11 @@
 }
 
 .header {
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.header h2 {
+  font-size: 3rem;
 }
 
 .content {
@@ -51,4 +55,12 @@
 
 .registration .footer p {
   font-family: var(--font-fam-lora);
+}
+
+.delete .footer {
+  flex-direction: column;
+}
+
+.delete .footer button {
+  width: unset;
 }

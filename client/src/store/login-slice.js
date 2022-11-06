@@ -94,4 +94,27 @@ export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
   };
 };
 
+export const deleteAccount = (uid) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/${uid}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      dispatch(loginActions.logout());
+    } catch (err) {
+      alert(err);
+    }
+  };
+};
+
 export default loginSlice;

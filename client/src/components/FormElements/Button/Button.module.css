@@ -11,7 +11,8 @@
 }
 
 .btn--primary,
-.btn--secondary {
+.btn--secondary,
+.btn--danger {
   padding: 1.2rem 2.4rem;
   border-radius: 6px;
 }
@@ -24,6 +25,11 @@
 .btn--secondary {
   border: 1px solid var(--primary-blue-dark);
   color: var(--primary-blue-dark);
+}
+
+.btn--danger {
+  border: 1px solid var(--state-red);
+  color: var(--state-red);
 }
 
 .btn--light {
@@ -63,4 +69,8 @@
 
 .btn.active svg {
   stroke: var(--primary-blue-dark);
+}
+
+.btn:disabled {
+  opacity: 50%;
 }
