@@ -57,11 +57,11 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
     const userData = await User.destroy({
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
 
@@ -77,5 +77,3 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
-
-

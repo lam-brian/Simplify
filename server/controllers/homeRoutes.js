@@ -1,21 +1,23 @@
 const router = require("express").Router();
 const { Note, User } = require("../models");
 
-router.get("/:uid", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.uid, {
+    const userData = await User.findByPk(req.session.user_id, {
       include: [{ model: Note }],
     });
 
     const user = userData.get({ plain: true });
-    const { id, name, notes } = user;
-    res.json({ id, name, notes });
+
+    if (!user) {
+      res.status(404).json({ message: "No user found with this id!" });
+      return;
+    }
+
+    const { name, email, notes } = user;
+    res.json({ name, email, notes });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      error: true,
-      message: "Couldn't get notes.",
-    });
+    res.status(500).json(err);
   }
 });
 

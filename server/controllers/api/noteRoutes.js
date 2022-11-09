@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Note } = require("../../models");
+const withAuth = require("../../utils/auth");
 const summarize = require("../../utils/summarize");
 const webscrape = require("../../utils/webscrape");
 
@@ -33,11 +34,11 @@ router.post("/", async (req, res) => {
   res.json(summaryData);
 });
 
-router.post("/newNote", async (req, res) => {
+router.post("/newNote", withAuth, async (req, res) => {
   try {
     const newNote = await Note.create({
       ...req.body,
-      user_id: req.body.userId,
+      user_id: req.session.user_id,
     });
     res.status(200).json(newNote);
   } catch (err) {
@@ -45,7 +46,7 @@ router.post("/newNote", async (req, res) => {
   }
 });
 
-router.patch("/:nid", async (req, res) => {
+router.patch("/:nid", withAuth, async (req, res) => {
   try {
     const updatedNote = await Note.update(
       {
@@ -56,6 +57,7 @@ router.patch("/:nid", async (req, res) => {
       {
         where: {
           id: req.params.nid,
+          user_id: req.session.user_id,
         },
       }
     );
@@ -71,11 +73,12 @@ router.patch("/:nid", async (req, res) => {
   }
 });
 
-router.delete("/:nid", async (req, res) => {
+router.delete("/:nid", withAuth, async (req, res) => {
   try {
     const deletedNote = await Note.destroy({
       where: {
         id: req.params.nid,
+        user_id: req.session.user_id,
       },
     });
 
