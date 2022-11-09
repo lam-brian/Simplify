@@ -67,7 +67,6 @@ const Registration = () => {
         label="Full Name"
         id="name"
         type="text"
-        placeholder="John Smith"
         required
         onInput={setEnteredName}
         value={enteredName}
@@ -77,7 +76,6 @@ const Registration = () => {
         label="Email"
         id="email"
         type="email"
-        placeholder="johnsmith@gmail.com"
         required
         onInput={setEnteredEmail}
         value={enteredEmail}
@@ -116,7 +114,6 @@ const Registration = () => {
           label="Email"
           id="email"
           type="email"
-          placeholder="johnsmith@gmail.com"
           required
           onInput={setEnteredEmail}
           value={enteredEmail}
