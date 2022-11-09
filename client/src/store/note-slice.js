@@ -129,11 +129,14 @@ export const fetchNotes = (loggedIn) => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/notes`,
         {
+          method: "GET",
           credentials: "include",
         }
       );
 
-      if (!response.ok) return;
+      if (!response.ok) {
+        throw new Error("Error fetching notes");
+      }
 
       const data = await response.json();
 
@@ -145,7 +148,7 @@ export const fetchNotes = (loggedIn) => {
 
       dispatch(noteActions.retrieveNotes(notes));
     } catch (err) {
-      alert(err);
+      console.error(err.message);
     }
   };
 };

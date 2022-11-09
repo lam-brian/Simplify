@@ -14,8 +14,8 @@ const sess = {
   cookie: {
     maxAge: 86400000,
     httpOnly: true,
-    secure: false,
-    sameSite: "strict",
+    secure: process.env.CLIENT_URL !== "http://localhost:3000",
+    sameSite: "none",
   },
   resave: false,
   saveUninitialized: true,
@@ -23,6 +23,8 @@ const sess = {
     db: sequelize,
   }),
 };
+
+app.set("trust proxy", true);
 
 app.use(
   cors({

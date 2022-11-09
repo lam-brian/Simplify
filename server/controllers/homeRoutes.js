@@ -2,6 +2,10 @@ const router = require("express").Router();
 const { Note, User } = require("../models");
 
 router.get("/", async (req, res) => {
+  if (!req.session.user_id) {
+    res.status(403).json({ message: "not logged in" });
+    return;
+  }
   try {
     const userData = await User.findByPk(req.session.user_id, {
       include: [{ model: Note }],
