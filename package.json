@@ -1,0 +1,23 @@
+{
+  "name": "api-world",
+  "version": "1.0.0",
+  "description": "This project was submitted to the API World Hackathon 2022 [here](https://devpost.com/software/simplify-82ux9o).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "concurrently \"cd client && npm start\" \"cd server && npm start\" "
+  },
+    "devDependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lam-brian/API-World.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lam-brian/API-World/issues"
+  },
+  "homepage": "https://github.com/lam-brian/API-World#readme"
+}
