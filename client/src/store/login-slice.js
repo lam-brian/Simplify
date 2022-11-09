@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchNotes } from "./note-slice";
 import { uiActions } from "./ui-slice";
 
 const initialState = {
@@ -6,7 +7,6 @@ const initialState = {
   user: {
     username: "",
     email: "",
-    id: "",
   },
 };
 
@@ -16,13 +16,11 @@ const loginSlice = createSlice({
   reducers: {
     login(state, action) {
       state.isLoggedIn = true;
-      state.user.id = action.payload.id;
       state.user.username = action.payload.name;
       state.user.email = action.payload.email;
     },
     logout(state) {
       state.isLoggedIn = false;
-      state.user.id = "";
       state.user.username = "";
       state.user.email = "";
     },
@@ -42,6 +40,7 @@ export const logUserIn = (enteredEmail, enteredPassword) => {
             email: enteredEmail,
             password: enteredPassword,
           }),
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
         }
       );
@@ -52,9 +51,10 @@ export const logUserIn = (enteredEmail, enteredPassword) => {
         throw new Error(data.message);
       }
 
-      const { id, name, email } = data.user;
+      const { name, email } = data.user;
 
-      dispatch(loginActions.login({ id, name, email }));
+      dispatch(loginActions.login({ name, email }));
+      dispatch(fetchNotes(true));
       dispatch(uiActions.closeLoginModal());
     } catch (err) {
       alert(err);
@@ -75,6 +75,7 @@ export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
             password: enteredPassword,
           }),
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
         }
       );
 
@@ -84,9 +85,10 @@ export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
         throw new Error(data.errors[0].message);
       }
 
-      const { id, name, email } = data;
+      const { name, email } = data;
 
-      dispatch(loginActions.login({ id, name, email }));
+      dispatch(loginActions.login({ name, email }));
+      dispatch(fetchNotes(true));
       dispatch(uiActions.closeLoginModal());
     } catch (err) {
       alert(err);
@@ -94,13 +96,36 @@ export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
   };
 };
 
-export const deleteAccount = (uid) => {
+export const logUserOut = () => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/${uid}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("something went wrong");
+      }
+
+      dispatch(loginActions.logout());
+    } catch (err) {
+      alert(err);
+    }
+  };
+};
+
+export const deleteAccount = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 

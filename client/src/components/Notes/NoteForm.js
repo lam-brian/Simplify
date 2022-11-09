@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import NoteCard from "./NoteCard";
@@ -11,7 +11,6 @@ import { noteActions, saveNoteToDB } from "../../store/note-slice";
 const NoteForm = ({ summary, keywords }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.login.user.id);
 
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredSummary, setEnteredSummary] = useState(summary || "");
@@ -95,7 +94,6 @@ const NoteForm = ({ summary, keywords }) => {
       summary: enteredSummary,
       highlights,
       date: new Date().toISOString(),
-      userId,
     };
 
     dispatch(saveNoteToDB(note));

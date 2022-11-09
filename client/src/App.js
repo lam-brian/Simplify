@@ -13,17 +13,14 @@ import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.login.user);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const isLoading = useSelector((state) => state.ui.isLoading);
 
   let routes;
 
   useEffect(() => {
-    if (user.id) {
-      dispatch(fetchNotes(user.id));
-    }
-  }, [dispatch, user.id]);
+    dispatch(fetchNotes(false));
+  }, [dispatch]);
 
   if (isLoggedIn) {
     routes = (

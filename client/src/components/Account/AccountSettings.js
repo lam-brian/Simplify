@@ -7,13 +7,13 @@ import ChangePassword from "./ChangePassword";
 import DeleteAccount from "./DeleteAccount";
 import Button from "../FormElements/Button/Button";
 
-const AccountSettings = ({ username, email, id }) => {
+const AccountSettings = ({ username, email }) => {
   const dispatch = useDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const deleteAccountHandler = () => {
-    dispatch(deleteAccount(id));
+    dispatch(deleteAccount());
   };
 
   return (

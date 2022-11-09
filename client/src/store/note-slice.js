@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginActions } from "./login-slice";
 import { uiActions } from "./ui-slice";
 
 const noteSlice = createSlice({
@@ -107,6 +108,7 @@ export const saveNoteToDB = (note) => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(note),
         }
       );
@@ -121,18 +123,27 @@ export const saveNoteToDB = (note) => {
   };
 };
 
-export const fetchNotes = (uid) => {
+export const fetchNotes = (loggedIn) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/notes/${uid}`
+        `${process.env.REACT_APP_BACKEND_URL}/notes`,
+        {
+          credentials: "include",
+        }
       );
 
-      if (!response.ok) throw new Error("Error fetching notes");
+      if (!response.ok) return;
 
       const data = await response.json();
 
-      dispatch(noteActions.retrieveNotes(data.notes));
+      const { name, email, notes } = data;
+
+      if (!loggedIn) {
+        dispatch(loginActions.login({ name, email }));
+      }
+
+      dispatch(noteActions.retrieveNotes(notes));
     } catch (err) {
       alert(err);
     }
@@ -146,6 +157,7 @@ export const deleteNote = (nid) => {
         `${process.env.REACT_APP_BACKEND_URL}/api/notes/${nid}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
@@ -167,6 +179,7 @@ export const patchNote = (nid, highlights, title, summary) => {
           method: "PATCH",
           body: JSON.stringify({ highlights, title, summary }),
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
         }
       );
 

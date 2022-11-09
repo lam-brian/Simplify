@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
-import { loginActions } from "../../store/login-slice";
+import { logUserOut } from "../../store/login-slice";
 import { noteActions } from "../../store/note-slice";
 
 import Button from "../FormElements/Button/Button";
@@ -68,7 +68,7 @@ const MainNavigation = () => {
               <li>
                 <Button
                   onClick={() => {
-                    dispatch(loginActions.logout());
+                    dispatch(logUserOut());
                     dispatch(noteActions.clearNotes());
                   }}
                 >

@@ -34,8 +34,6 @@ const SelectedNote = ({ title, summary, keywords, id }) => {
   const titleRef = useRef(null);
   const summaryRef = useRef(null);
 
-  console.log(highlights, keywords);
-
   const openDeleteModalHandler = () => {
     setShowSettings(false);
     setShowDeleteModal(true);
