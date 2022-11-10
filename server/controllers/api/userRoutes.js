@@ -76,4 +76,33 @@ router.delete("/", async (req, res) => {
   }
 });
 
+router.put("/reset-password/:password_reset", async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      where: { id: req.session.user_id },
+    });
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (userData && validPassword) {
+      const updatedPassword = await User.update(
+        {
+          password: req.params.password_reset,
+        },
+        {
+          where: {
+            id: req.session.user_id,
+          },
+          individualHooks: true,
+        }
+      );
+      if (updatedPassword) {
+        res.status(200).json(updatedPassword);
+      }
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
