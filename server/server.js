@@ -15,7 +15,8 @@ const sess = {
     maxAge: 86400000,
     httpOnly: true,
     secure: process.env.CLIENT_URL !== "http://localhost:3000",
-    sameSite: "none",
+    sameSite:
+      process.env.CLIENT_URL !== "http://localhost:3000" ? "none" : "strict",
   },
   resave: false,
   saveUninitialized: true,
