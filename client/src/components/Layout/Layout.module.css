@@ -17,3 +17,17 @@
     padding: 0 4.8rem;
   }
 }
+
+@media (max-width: 1080px) {
+  .container {
+    display: unset;
+  }
+}
+
+@media (max-width: 620px) {
+  .container .main {
+    width: 100%;
+    max-width: unset;
+    margin-top: 2.4rem;
+  }
+}

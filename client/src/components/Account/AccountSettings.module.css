@@ -60,3 +60,15 @@
 .content button {
   width: 50%;
 }
+
+@media (max-width: 450px) {
+  .avatar {
+    width: 8rem;
+    height: 8rem;
+    font-size: 4.8rem;
+  }
+
+  .content button {
+    width: 100%;
+  }
+}

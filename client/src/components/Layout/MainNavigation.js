@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { logUserOut } from "../../store/login-slice";
@@ -12,20 +13,38 @@ import { ReactComponent as SettingsIcon } from "../../images/icons/settings.svg"
 import { ReactComponent as LogoutIcon } from "../../images/icons/logout.svg";
 import { illustrations } from "../../images";
 import styles from "./MainNavigation.module.css";
+import HamburgerBtn from "../UI/HamburgerBtn/HamburgerBtn";
 
 const MainNavigation = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const navigate = useNavigate();
+  const [openMobileNav, setOpenMobileNav] = useState(false);
+
+  const { pathname } = useLocation();
+  console.log(pathname);
+
+  const toggleMobileNav = () => {
+    setOpenMobileNav((state) => !state);
+  };
+
+  useEffect(() => {
+    setOpenMobileNav(false);
+  }, [pathname]);
 
   return (
     <header className={`${styles.header} ${isLoggedIn ? styles.sidebar : ""}`}>
+      {isLoggedIn && (
+        <HamburgerBtn toggleNav={toggleMobileNav} isOpen={openMobileNav} />
+      )}
       <div className={styles.logo}>
         <img src={simplifyLogo} alt="logo" />
       </div>
       {isLoggedIn && (
         <>
-          <nav className={styles.nav}>
+          <nav
+            className={`${styles.nav} ${openMobileNav ? styles.active : ""}`}
+          >
             <ul>
               <li>
                 <Button onClick={() => navigate("/new-note")}>
