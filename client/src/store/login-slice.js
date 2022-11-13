@@ -31,6 +31,7 @@ export const loginActions = loginSlice.actions;
 
 export const logUserIn = (enteredEmail, enteredPassword) => {
   return async (dispatch) => {
+    dispatch(uiActions.setIsLoading(true));
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/login`,
@@ -56,7 +57,9 @@ export const logUserIn = (enteredEmail, enteredPassword) => {
       dispatch(loginActions.login({ name, email }));
       dispatch(fetchNotes(true));
       dispatch(uiActions.closeLoginModal());
+      dispatch(uiActions.setIsLoading(false));
     } catch (err) {
+      dispatch(uiActions.setIsLoading(false));
       alert(err);
     }
   };
@@ -64,6 +67,7 @@ export const logUserIn = (enteredEmail, enteredPassword) => {
 
 export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
   return async (dispatch) => {
+    dispatch(uiActions.setIsLoading(true));
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/users`,
@@ -90,7 +94,9 @@ export const signUserUp = (enteredName, enteredEmail, enteredPassword) => {
       dispatch(loginActions.login({ name, email }));
       dispatch(fetchNotes(true));
       dispatch(uiActions.closeLoginModal());
+      dispatch(uiActions.setIsLoading(false));
     } catch (err) {
+      dispatch(uiActions.setIsLoading(false));
       alert(err);
     }
   };
