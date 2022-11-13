@@ -22,7 +22,6 @@ const MainNavigation = () => {
   const [openMobileNav, setOpenMobileNav] = useState(false);
 
   const { pathname } = useLocation();
-  console.log(pathname);
 
   const toggleMobileNav = () => {
     setOpenMobileNav((state) => !state);
