@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deleteAccount } from "../../store/login-slice";
 
 import styles from "./AccountSettings.module.css";
 import ChangePassword from "./ChangePassword";
@@ -8,13 +6,8 @@ import DeleteAccount from "./DeleteAccount";
 import Button from "../FormElements/Button/Button";
 
 const AccountSettings = ({ username, email }) => {
-  const dispatch = useDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-
-  const deleteAccountHandler = () => {
-    dispatch(deleteAccount());
-  };
 
   return (
     <>
@@ -57,7 +50,6 @@ const AccountSettings = ({ username, email }) => {
       <DeleteAccount
         show={isDeleteModalOpen}
         onCancel={() => setIsDeleteModalOpen(false)}
-        onSubmit={deleteAccountHandler}
       />
     </>
   );

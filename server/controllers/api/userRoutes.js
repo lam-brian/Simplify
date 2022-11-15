@@ -76,18 +76,23 @@ router.delete("/", async (req, res) => {
   }
 });
 
-router.put("/reset-password/:password_reset", async (req, res) => {
+router.put("/reset-password", async (req, res) => {
   try {
     const userData = await User.findOne({
       where: { id: req.session.user_id },
     });
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(req.body.oldPassword);
+
+    if (!validPassword) {
+      res.status(404).json({ message: "Old password is wrong" });
+      return;
+    }
 
     if (userData && validPassword) {
       const updatedPassword = await User.update(
         {
-          password: req.params.password_reset,
+          password: req.body.newPassword,
         },
         {
           where: {
@@ -97,7 +102,7 @@ router.put("/reset-password/:password_reset", async (req, res) => {
         }
       );
       if (updatedPassword) {
-        res.status(200).json(updatedPassword);
+        res.status(200).json({ message: "Password changed successfully" });
       }
     }
   } catch (err) {

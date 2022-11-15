@@ -1,16 +1,19 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteAccount } from "../../store/login-slice";
 
 import Modal from "../UI/Modal/Modal";
 import { icons } from "../../images";
 import styles from "./DeleteAccount.module.css";
 import Button from "../FormElements/Button/Button";
 
-const DeleteAccount = ({ show, onCancel, onSubmit }) => {
+const DeleteAccount = ({ show, onCancel }) => {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
 
   const deleteAccountHandler = (e) => {
     e.preventDefault();
-    onSubmit();
+    dispatch(deleteAccount());
     setInputValue("");
   };
 
