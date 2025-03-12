@@ -3,8 +3,6 @@
 ## 🚀 Submission
 This project was submitted to the API World Hackathon 2022 [here](https://devpost.com/software/simplify-82ux9o).
 
-You can also try out the [live demo](https://simplify-apiworlds.netlify.app/summarize) by creating an account.
-
 ## 💡 Inspiration
 **Problem** In this day and age of social media and digital distractions, many students find it difficult to balance their time. Also, in order to manage their career, school, and personal responsibilities, students have to manage their time effectively. We realized that for those **busy students who don’t have time to read or go through complex and lengthy content**, they need to find a time-saving solution. In addition to not having time, students also have a **difficult time understanding and retaining the main idea**.
 
